@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Loader from "@/components/Loader";
+import CustomCursor from "@/components/CustomCursor";
+import PageTransition from "@/components/PageTransition";
+import Nav from "@/components/Nav";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "Dagmara Rudzinska — Product Designer",
@@ -13,7 +18,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body suppressHydrationWarning>
+        <CustomCursor />
+        <ScrollReveal />
+        <Nav />
+        <Loader><PageTransition>{children}</PageTransition></Loader>
+      </body>
     </html>
   );
 }

@@ -1,14 +1,44 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Figtree:wght@400&display=swap');
 @import "tailwindcss";
 
-* {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  cursor: none !important;
 }
+
+html, body {
+  cursor: none !important;
+}
+
+input, textarea, select {
+  cursor: text !important;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-transition {
+  animation: fadeInUp 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
 
 body {
   font-family: 'Instrument Sans', sans-serif;
-  background: #ffffff;
-  color: #1a1a1a;
+  background: #fcfcfc;
+  color: #242424;
 }
+
