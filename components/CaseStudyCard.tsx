@@ -26,12 +26,16 @@ export default function CaseStudyCard({
   industry,
   platform,
   title,
+  titleMinHeight,
+  titleRef,
 }: {
   href: string;
   client: string;
   industry: string;
   platform?: string;
   title: string;
+  titleMinHeight?: number;
+  titleRef?: React.RefObject<HTMLParagraphElement | null>;
 }) {
   const [hovered, setHovered] = useState(false);
 
@@ -54,7 +58,7 @@ export default function CaseStudyCard({
       }}
     >
       <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 16 }}>
-        <p style={{ fontSize: 20, fontWeight: 600, lineHeight: 1.3, margin: 0 }}>{title}</p>
+        <p ref={titleRef} style={{ fontSize: 20, fontWeight: 600, lineHeight: 1.3, margin: 0, minHeight: titleMinHeight }}>{title}</p>
         <div style={{ display: "flex" }}>
           {[
             { label: "Client", value: client },

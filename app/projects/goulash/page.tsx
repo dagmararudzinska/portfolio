@@ -1,7 +1,7 @@
 "use client";
 import { Fragment, useState } from "react";
 import Footer from "@/components/Footer";
-import CaseStudyCard from "@/components/CaseStudyCard";
+import CaseStudyGrid from "@/components/CaseStudyGrid";
 import { View, Idea, Star, Growth, ArrowRight, ChevronDown, ChevronUp } from "@carbon/icons-react";
 import { KDD_INDEX } from "@/lib/styles";
 
@@ -382,22 +382,10 @@ export default function Goulash() {
         {/* See other case studies */}
         <div style={{ paddingBottom: 160, paddingTop: expanded ? 0 : 0 }} className="reveal">
           <h2 style={{ ...H2, marginBottom: 40 }}>See other case studies</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
-            <CaseStudyCard
-              href="/projects/wooclap"
-              client="Wooclap"
-              industry="Edtech"
-              platform="Desktop"
-              title="Designing an intuitive drag-and-drop grouping experience for live presentations"
-            />
-            <CaseStudyCard
-              href="/projects/nn"
-              client="Nationale Nederlanden"
-              industry="Insurance"
-              platform="Desktop"
-              title="Redesigning the agent experience in an insurance CRM \u2014 unified workflows and commission tracking"
-            />
-          </div>
+          <CaseStudyGrid cards={[
+            { href: "/projects/wooclap", client: "Wooclap", industry: "Edtech", platform: "Desktop", title: "Designing an intuitive drag-and-drop grouping experience for live presentations" },
+            { href: "/projects/nn", client: "Nationale Nederlanden", industry: "Insurance", platform: "Desktop", title: "Redesigning the agent experience in an insurance CRM \u2014 unified workflows and commission tracking" },
+          ]} />
         </div>
 
       </div>

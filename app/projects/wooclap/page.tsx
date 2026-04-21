@@ -2,7 +2,7 @@
 import { Fragment, useState, useRef, useLayoutEffect } from "react";
 import Footer from "@/components/Footer";
 import { ArrowUpRight, ArrowRight, View, Idea, ChevronDown, ChevronUp } from "@carbon/icons-react";
-import CaseStudyCard from "@/components/CaseStudyCard";
+import CaseStudyGrid from "@/components/CaseStudyGrid";
 import { KDD_INDEX, TAB_BAR, tabItem } from "@/lib/styles";
 
 const LABEL: React.CSSProperties = {
@@ -548,22 +548,10 @@ export default function Wooclap() {
         {/* See other case studies */}
         <div style={{ paddingBottom: 160, paddingTop: expanded ? 40 : 0 }} className="reveal">
           <h2 style={{ ...H2, marginBottom: 40 }}>See other case studies</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
-            <CaseStudyCard
-              href="/projects/nn"
-              client="Nationale Nederlanden"
-              industry="Insurance"
-              platform="Desktop"
-              title="Redesigning the agent experience in an insurance CRM — unified workflows and commission tracking"
-            />
-            <CaseStudyCard
-              href="/projects/goulash"
-              client="Goulash"
-              industry="Food tech"
-              platform="Mobile"
-              title="Introducing a way to communicate savings indirectly in a meal planning app"
-            />
-          </div>
+          <CaseStudyGrid cards={[
+            { href: "/projects/nn", client: "Nationale Nederlanden", industry: "Insurance", platform: "Desktop", title: "Redesigning the agent experience in an insurance CRM \u2014 unified workflows and commission tracking" },
+            { href: "/projects/goulash", client: "Goulash", industry: "Food tech", platform: "Mobile", title: "Introducing a way to communicate savings indirectly in a meal planning app" },
+          ]} />
         </div>
 
       </div>

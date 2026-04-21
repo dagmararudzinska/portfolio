@@ -1,7 +1,7 @@
 "use client";
 import { Fragment, useState } from "react";
 import Footer from "@/components/Footer";
-import CaseStudyCard from "@/components/CaseStudyCard";
+import CaseStudyGrid from "@/components/CaseStudyGrid";
 import { KDD_INDEX } from "@/lib/styles";
 import { ChevronDown, ChevronUp } from "@carbon/icons-react";
 
@@ -336,22 +336,10 @@ export default function NN() {
         {/* See other case studies */}
         <div style={{ paddingBottom: 160, paddingTop: expanded ? 40 : 0 }} className="reveal">
           <h2 style={{ ...H2, marginBottom: 40 }}>See other case studies</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
-            <CaseStudyCard
-              href="/projects/wooclap"
-              client="Wooclap"
-              industry="Edtech"
-              platform="Desktop"
-              title="Designing an intuitive drag-and-drop grouping experience for live presentations"
-            />
-            <CaseStudyCard
-              href="/projects/goulash"
-              client="Goulash"
-              industry="Food tech"
-              platform="Mobile"
-              title="Introducing a way to communicate savings indirectly in a meal planning app"
-            />
-          </div>
+          <CaseStudyGrid cards={[
+            { href: "/projects/wooclap", client: "Wooclap", industry: "Edtech", platform: "Desktop", title: "Designing an intuitive drag-and-drop grouping experience for live presentations" },
+            { href: "/projects/goulash", client: "Goulash", industry: "Food tech", platform: "Mobile", title: "Introducing a way to communicate savings indirectly in a meal planning app" },
+          ]} />
         </div>
 
       </div>
