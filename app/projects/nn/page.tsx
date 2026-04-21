@@ -6,15 +6,15 @@ import { KDD_INDEX } from "@/lib/styles";
 import { ChevronDown, ChevronUp } from "@carbon/icons-react";
 
 const LABEL: React.CSSProperties = {
-  fontSize: 16,
-  fontWeight: 600,
+  fontSize: 14,
+  fontWeight: 400,
   letterSpacing: "0.8px",
   textTransform: "uppercase",
   color: "#595959",
   paddingTop: 6,
   margin: 0,
   position: "sticky",
-  top: 88,
+  top: 120,
   alignSelf: "start",
 };
 
@@ -71,15 +71,15 @@ function ReadMoreButton({ expanded, onToggle, label }: { expanded: boolean; onTo
           display: "inline-flex",
           alignItems: "center",
           gap: 8,
-          background: hovered ? "#3a3a3a" : "#242424",
-          color: "#fcfcfc",
+          background: hovered ? "#ececec" : "#242424",
+          color: hovered ? "#242424" : "#fcfcfc",
           border: "0.5px solid #242424",
           padding: "12px 24px",
           fontSize: 15,
           fontWeight: 400,
           fontFamily: "inherit",
           cursor: "pointer",
-          transition: "background 0.2s ease",
+          transition: "background 0.2s ease, color 0.2s ease",
         }}
       >
         {expanded ? "Collapse" : label}
@@ -138,8 +138,7 @@ export default function NN() {
               },
             ].map((card, i) => (
               <div key={card.label} style={{ padding: 32, borderRight: i % 2 === 0 ? "0.5px solid #595959" : undefined, borderBottom: i < 2 ? "0.5px solid #595959" : undefined }}>
-                <p style={{ fontSize: 10, color: "rgba(36,36,36,0.35)", margin: "0 0 4px", fontWeight: 600, letterSpacing: "0.6px" }}>{card.n}</p>
-                <p style={{ fontSize: 15, fontWeight: 600, lineHeight: 1.55, margin: "0 0 12px" }}>{card.label}</p>
+                <p style={{ fontSize: 15, fontWeight: 600, lineHeight: 1.55, margin: "0 0 12px" }}><span style={{ color: "rgba(36,36,36,0.35)" }}>{card.n} </span>{card.label}</p>
                 <p style={BODY}>{card.text}</p>
               </div>
             ))}

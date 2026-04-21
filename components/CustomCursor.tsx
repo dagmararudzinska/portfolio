@@ -25,11 +25,17 @@ export default function CustomCursor() {
       }
     }
 
+    function handleMouseLeave() {
+      cursor!.style.opacity = "0";
+    }
+
     document.addEventListener("mousemove", move);
     document.addEventListener("visibilitychange", handleVisibility);
+    document.addEventListener("mouseleave", handleMouseLeave);
     return () => {
       document.removeEventListener("mousemove", move);
       document.removeEventListener("visibilitychange", handleVisibility);
+      document.removeEventListener("mouseleave", handleMouseLeave);
     };
   }, []);
 
