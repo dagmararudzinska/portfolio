@@ -112,7 +112,7 @@ const designRows = [
   },
   {
     insight: "People tend to see the same discount as more valuable if it\u2019s presented as the larger number.",
-    decision: "Show the most meaningful savings \u2014 as a percentage or as an absolute amount. We\u2019ve flagged this for A/B testing.",
+    decision: "Show the most meaningful savings — as a percentage or as an absolute amount. We\u2019ve flagged this for A/B testing.",
     matters: "Users can quickly see which recipes have the biggest impact on the budget.",
     impact: "Stronger perception of value when optimizing the shopping list.",
   },
@@ -235,7 +235,7 @@ export default function Goulash() {
           <div style={{ position: "relative" }}>
             <img
               src="/goulash-hero.gif"
-              alt="Goulash savings experience \u2014 discount badges, deals filter, and savings popup"
+              alt="Goulash savings experience — discount badges, deals filter, and savings popup"
               style={{ width: "100%", height: "auto", display: "block" }}
             />
             <div style={{ position: "absolute", inset: 0, border: "0.5px solid #D4D4D2", pointerEvents: "none" }} />
@@ -346,7 +346,7 @@ export default function Goulash() {
               <div style={{ position: "relative" }}>
                 <img
                   src="/goulash-components.png"
-                  alt="Goulash savings components \u2014 recipe page with banner and cart with discounted ingredients"
+                  alt="Goulash savings components — recipe page with banner and cart with discounted ingredients"
                   style={{ width: "100%", height: "auto", display: "block" }}
                 />
                 <div style={{ position: "absolute", inset: 0, border: "0.5px solid #D4D4D2", pointerEvents: "none" }} />
@@ -384,7 +384,7 @@ export default function Goulash() {
           <h2 style={{ ...H2, marginBottom: 40 }}>See other case studies</h2>
           <CaseStudyGrid cards={[
             { href: "/projects/wooclap", client: "Wooclap", industry: "Edtech", platform: "Desktop", title: "Designing an intuitive drag-and-drop grouping experience for live presentations" },
-            { href: "/projects/nn", client: "Nationale Nederlanden", industry: "Insurance", platform: "Desktop", title: "Redesigning the agent experience in an insurance CRM \u2014 unified workflows and commission tracking" },
+            { href: "/projects/nn", client: "Nationale Nederlanden", industry: "Insurance", platform: "Desktop", title: "Redesigning the agent experience in an insurance CRM — unified workflows and commission tracking" },
           ]} />
         </div>
 

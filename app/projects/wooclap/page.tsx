@@ -302,7 +302,7 @@ export default function Wooclap() {
               {
                 n: "03",
                 label: "Process",
-                text: "I designed \u201cGrouping\u201d \u2014 a new exercise type. Core decisions: introduce it as a new feature rather than expanding an existing one; use drag-and-drop; and let the UI handle feedback without interrupting the flow.",
+                text: "I designed \u201cGrouping\u201d — a new exercise type. Core decisions: introduce it as a new feature rather than expanding an existing one; use drag-and-drop; and let the UI handle feedback without interrupting the flow.",
               },
               {
                 n: "04",
@@ -549,7 +549,7 @@ export default function Wooclap() {
         <div style={{ paddingBottom: 160, paddingTop: expanded ? 40 : 0 }} className="reveal">
           <h2 style={{ ...H2, marginBottom: 40 }}>See other case studies</h2>
           <CaseStudyGrid cards={[
-            { href: "/projects/nn", client: "Nationale Nederlanden", industry: "Insurance", platform: "Desktop", title: "Redesigning the agent experience in an insurance CRM \u2014 unified workflows and commission tracking" },
+            { href: "/projects/nn", client: "Nationale Nederlanden", industry: "Insurance", platform: "Desktop", title: "Redesigning the agent experience in an insurance CRM — unified workflows and commission tracking" },
             { href: "/projects/goulash", client: "Goulash", industry: "Food tech", platform: "Mobile", title: "Introducing a way to communicate savings indirectly in a meal planning app" },
           ]} />
         </div>

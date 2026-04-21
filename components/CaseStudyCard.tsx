@@ -47,7 +47,7 @@ export default function CaseStudyCard({
       style={{
         display: "flex",
         flexDirection: "row",
-        alignItems: "center",
+        alignItems: "flex-start",
         gap: 32,
         textDecoration: "none",
         color: "#242424",
