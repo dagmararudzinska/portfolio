@@ -47,7 +47,7 @@ export default function CaseStudyCard({
       style={{
         display: "flex",
         flexDirection: "row",
-        alignItems: "center",
+        alignItems: "stretch",
         gap: 32,
         textDecoration: "none",
         color: "#242424",
@@ -72,15 +72,16 @@ export default function CaseStudyCard({
           ))}
         </div>
       </div>
-      <div
-        style={{
-          flexShrink: 0,
-          transition: "transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.35s ease",
-          transform: hovered ? "translateX(8px)" : "translateX(-8px)",
-          opacity: hovered ? 1 : 0,
-        }}
-      >
-        <ArrowRight size={48} />
+      <div style={{ flexShrink: 0, display: "flex", alignItems: "center" }}>
+        <div
+          style={{
+            transition: "transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.35s ease",
+            transform: hovered ? "translateX(8px)" : "translateX(-8px)",
+            opacity: hovered ? 1 : 0,
+          }}
+        >
+          <ArrowRight size={48} />
+        </div>
       </div>
     </Link>
   );
