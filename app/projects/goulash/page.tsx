@@ -6,9 +6,9 @@ import { View, Idea, Star, Growth, ArrowRight, ChevronDown, ChevronUp } from "@c
 import { KDD_INDEX } from "@/lib/styles";
 
 const LABEL: React.CSSProperties = {
-  fontSize: 14,
+  fontSize: 16,
   fontWeight: 400,
-  letterSpacing: "0.8px",
+  lineHeight: "140%",
   textTransform: "uppercase",
   color: "#595959",
   paddingTop: 6,
@@ -223,7 +223,7 @@ export default function Goulash() {
               },
             ].map((card, i) => (
               <div key={card.label} style={{ padding: 32, borderRight: i % 2 === 0 ? "0.5px solid #595959" : undefined, borderBottom: i < 2 ? "0.5px solid #595959" : undefined }}>
-                <p style={{ fontSize: 15, fontWeight: 600, lineHeight: 1.55, margin: "0 0 12px" }}><span style={{ color: "rgba(36,36,36,0.35)" }}>{card.n} </span>{card.label}</p>
+                <div style={{ display: "flex", gap: 16, alignItems: "baseline", margin: "0 0 12px" }}><span style={{ fontSize: 15, fontWeight: 600, color: "rgba(36,36,36,0.35)", flexShrink: 0 }}>{card.n}</span><span style={{ fontSize: 15, fontWeight: 600 }}>{card.label}</span></div>
                 <p style={BODY}>{card.text}</p>
               </div>
             ))}

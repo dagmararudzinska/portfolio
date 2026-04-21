@@ -73,7 +73,7 @@ export default function Footer() {
             Let&apos;s work together
           </p>
           <p style={{ fontSize: 15, fontWeight: 400, lineHeight: 1.55, color: "#595959", margin: 0, maxWidth: 360 }}>
-            I&apos;m available for freelance projects, full-time roles, and collaborative work. If you have something in mind, reach out — I&apos;d love to hear about it.
+            I&apos;m available for freelance projects, full-time roles, and other collaborative work. If you&apos;ve got an idea, just send me a message &ndash; I&apos;d be happy to talk about it :)
           </p>
         </div>
         <div style={{ display: "flex", gap: 16 }}>

@@ -12,7 +12,7 @@ const projects = [
   },
   {
     number: "02",
-    title: "Transforming insurance CRM — redesigning the agent experience with clearer workflows and commission tracking",
+    title: "Redesigning the agent experience in an insurance CRM — unified workflows and commission tracking",
     client: "Nationale Nederlanden",
     industry: "Insurance",
     platform: "Desktop",
@@ -20,7 +20,7 @@ const projects = [
   },
   {
     number: "03",
-    title: "Helping users find and optimize meal plans based on ingredient discounts and price tiers",
+    title: "Introducing a way to communicate savings indirectly in a meal planning app",
     client: "Goulash",
     industry: "Foodtech",
     platform: "Mobile",

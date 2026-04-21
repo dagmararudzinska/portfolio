@@ -25,7 +25,7 @@ export default function About() {
                   I approach problems by doing research, analysing workflows and figuring out where design can have the biggest impact.
                 </p>
                 <p style={{ fontSize: 15, fontWeight: 400, lineHeight: 1.55, margin: 0 }}>
-                  When I&apos;m not working, I&apos;m probably eating something good, working out the steps on a dance floor (currently deep in ballroom &ndash; quickstep is my favourite) or finding the nicest coffee shop in the area.
+                  When I&apos;m not working, I&apos;m probably eating something good or learning the steps on a dance floor (currently deep in ballroom &ndash; quickstep is my favourite).
                 </p>
               </div>
               <Link

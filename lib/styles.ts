@@ -27,12 +27,11 @@ export const TAB_BAR: CSSProperties = {
 export function tabItem(isActive: boolean): CSSProperties {
   return {
     padding: "16px 4px",
-    fontSize: 12,
-    fontWeight: 500,
-    lineHeight: 1.2,
-    letterSpacing: "0.12px",
+    fontSize: 16,
+    fontWeight: isActive ? 600 : 400,
+    lineHeight: "140%",
     textTransform: "uppercase",
-    color: "#242424",
+    color: isActive ? "#242424" : "#595959",
     cursor: "pointer",
     userSelect: "none",
     whiteSpace: "nowrap",

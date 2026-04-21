@@ -1,9 +1,11 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "@carbon/icons-react";
 
 export default function Homepage() {
+  const [hovered, setHovered] = useState(false);
+
   useEffect(() => {
     document.body.style.height = "100svh";
     document.body.style.overflow = "hidden";
@@ -18,16 +20,18 @@ export default function Homepage() {
       height: "calc(100svh - 73px)",
       overflow: "hidden",
       display: "flex",
+      flexDirection: "column",
       alignItems: "center",
-      justifyContent: "center",
       fontFamily: "'Instrument Sans', sans-serif",
-      position: "relative",
     }}>
+      {/* Title — takes remaining space and centers within it */}
       <div style={{
+        flex: 1,
         display: "flex",
         flexDirection: "column",
         gap: 24,
         alignItems: "center",
+        justifyContent: "center",
         textAlign: "center",
       }}>
         <h1 style={{
@@ -45,30 +49,47 @@ export default function Homepage() {
           fontWeight: 400,
           lineHeight: 1.55,
           color: "#242424",
-          whiteSpace: "nowrap",
           margin: 0,
         }}>
           crafting digital products for humans
         </p>
       </div>
 
-      <Link
-        href="/projects"
-        style={{
-          position: "absolute",
-          bottom: 80,
-          display: "inline-flex",
-          alignItems: "center",
-          gap: 8,
-          fontSize: 15,
-          fontWeight: 400,
-          color: "#242424",
-          textDecoration: "none",
-          fontFamily: "inherit",
-        }}
-      >
-        See my work <ArrowRight size={16} />
-      </Link>
+      {/* See my work — pinned 80px from bottom */}
+      <div style={{ paddingBottom: 80 }}>
+        <Link
+          href="/projects"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 8,
+            fontSize: 15,
+            fontWeight: 400,
+            color: "#242424",
+            textDecoration: "none",
+            fontFamily: "inherit",
+            padding: "4px",
+          }}
+        >
+          <span style={{ position: "relative", display: "inline-block", paddingBottom: 2 }}>
+            See my work
+            <span style={{
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              height: 3,
+              background: "#ececec",
+              transform: hovered ? "scaleX(1)" : "scaleX(0)",
+              transformOrigin: "left",
+              transition: "transform 0.25s ease",
+            }} />
+          </span>
+          <ArrowRight size={16} />
+        </Link>
+      </div>
     </div>
   );
 }

@@ -6,9 +6,9 @@ import CaseStudyCard from "@/components/CaseStudyCard";
 import { KDD_INDEX, TAB_BAR, tabItem } from "@/lib/styles";
 
 const LABEL: React.CSSProperties = {
-  fontSize: 14,
+  fontSize: 16,
   fontWeight: 400,
-  letterSpacing: "0.8px",
+  lineHeight: "140%",
   textTransform: "uppercase",
   color: "#595959",
   paddingTop: 6,
@@ -67,7 +67,7 @@ function Bullet({ children }: { children: React.ReactNode }) {
   );
 }
 
-function SecondaryLink({ href, children }: { href: string; children: React.ReactNode }) {
+function SecondaryLink({ href, label }: { href: string; label: string }) {
   const [hovered, setHovered] = useState(false);
   return (
     <a
@@ -88,10 +88,11 @@ function SecondaryLink({ href, children }: { href: string; children: React.React
         textDecoration: "none",
         fontFamily: "inherit",
         border: "0.5px solid #242424",
-        transition: "background 0.2s ease, color 0.2s ease",
+        transition: "background 0.2s ease",
       }}
     >
-      {children}
+      {label}
+      <ArrowUpRight size={16} style={{ transition: "transform 0.2s ease", transform: hovered ? "translate(2px, -2px)" : "translate(0,0)", flexShrink: 0 }} />
     </a>
   );
 }
@@ -310,7 +311,7 @@ export default function Wooclap() {
               },
             ].map((card, i) => (
               <div key={card.label} style={{ padding: 32, borderRight: i % 2 === 0 ? "0.5px solid #595959" : undefined, borderBottom: i < 2 ? "0.5px solid #595959" : undefined }}>
-                <p style={{ fontSize: 15, fontWeight: 600, lineHeight: 1.55, margin: "0 0 12px" }}><span style={{ color: "rgba(36,36,36,0.35)" }}>{card.n} </span>{card.label}</p>
+                <div style={{ display: "flex", gap: 16, alignItems: "baseline", margin: "0 0 12px" }}><span style={{ fontSize: 15, fontWeight: 600, color: "rgba(36,36,36,0.35)", flexShrink: 0 }}>{card.n}</span><span style={{ fontSize: 15, fontWeight: 600 }}>{card.label}</span></div>
                 <p style={BODY}>{card.text}</p>
               </div>
             ))}
@@ -425,73 +426,67 @@ export default function Wooclap() {
             <div style={{ paddingTop: 120, paddingBottom: 0 }} className="reveal">
               <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 40 }}>
                 <p style={LABEL}>Process</p>
-                <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                  <h2 style={H2}>Choosing what to solve and what to{"\u00a0"}set aside</h2>
-                  <p style={{ ...BODY, maxWidth: 640 }}>
-                    With a clearer picture of the problem space, I defined where to focus — as this
-                    was a time-boxed recruitment task intended to take a few hours. I decided to:
-                  </p>
-                  <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                    {[
-                      "Focus on two surfaces: the exercise creation flow for presenters, and the live completion experience for participants.",
-                      "Desktop only, to keep interaction decisions tight.",
-                      "Free tier constraints, to avoid designing around features that wouldn't be accessible to some users.",
-                      "Wooclap's existing design system — not a visual redesign.",
-                    ].map((item, i) => (
-                      <Bullet key={i}>{item}</Bullet>
-                    ))}
-                  </div>
-                  <p style={{ ...BODY, maxWidth: 640 }}>
-                    Everything else — presenter's results view, analytics, edge cases — I noted but
-                    set aside. My goal was to design the most shippable solution within realistic constraints.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* What to call it */}
-            <div style={{ paddingTop: 80, paddingBottom: 0 }} className="reveal">
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 40 }}>
-                <div />
-                <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                  <h2 style={H2}>What to call it (and why it{"\u00a0"}matters)</h2>
-                  <p style={{ ...BODY, maxWidth: 640 }}>
-                    What to call it mattered more than it might seem. The name shapes where the exercise
-                    lives in the UI and how users understand it before they've even clicked. In the table,
-                    you'll find a list of names I considered — along with their pros and cons. I went
-                    with "Grouping", as it maps most directly to what the exercise asks participants to do,
-                    and differentiates clearly from "Matching" in the picker.
-                  </p>
-                  <div style={{ border: "0.5px solid #595959", overflowX: "auto" }}>
-                    <div style={{ display: "grid", gridTemplateColumns: "160px 1fr 1fr", minWidth: 480 }}>
-                      {/* Single unified grid: header + all rows share the same grid context */}
-                      {["Proposition", "Pros", "Cons"].map((h, i) => (
-                        <div key={h} style={{ padding: "12px 24px", borderRight: i < 2 ? "0.5px solid #595959" : undefined, borderBottom: "0.5px solid #595959", background: "#f7f7f7" }}>
-                          <p style={{ ...LABEL, paddingTop: 0 }}>{h}</p>
-                        </div>
-                      ))}
+                <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                    <h2 style={H2}>Choosing what to solve and what to{"\u00a0"}set aside</h2>
+                    <p style={{ ...BODY, maxWidth: 640 }}>
+                      With a clearer picture of the problem space, I defined where to focus — as this
+                      was a time-boxed recruitment task intended to take a few hours. I decided to:
+                    </p>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                       {[
-                        { name: "Grouping", bold: true, pros: ["Maps directly to what participants do.", "Differentiates clearly from Matching."], cons: ["Slightly generic, but accurate."] },
-                        { name: "Sort", bold: false, pros: ["Short, active."], cons: ["Implies ordering/ranking, not grouping."] },
-                        { name: "Categorise", bold: false, pros: ["Familiar, academic framing."], cons: ["Feels formal; less intuitive as an action verb."] },
-                        { name: "Classify", bold: false, pros: ["Precise."], cons: ["Heavy and academic; low discoverability."] },
-                      ].map((row, i, arr) => (
-                        <Fragment key={row.name}>
-                          <div style={{ padding: "16px 24px", borderRight: "0.5px solid #595959", borderBottom: i < arr.length - 1 ? "0.5px solid #595959" : undefined }}>
-                            <p style={{ fontSize: 15, fontWeight: row.bold ? 600 : 400, lineHeight: 1.55, margin: 0 }}>{row.name}</p>
-                          </div>
-                          <div style={{ padding: "16px 24px", borderRight: "0.5px solid #595959", borderBottom: i < arr.length - 1 ? "0.5px solid #595959" : undefined }}>
-                            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                              {row.pros.map((p, j) => <Bullet key={j}>{p}</Bullet>)}
-                            </div>
-                          </div>
-                          <div style={{ padding: "16px 24px", borderBottom: i < arr.length - 1 ? "0.5px solid #595959" : undefined }}>
-                            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                              {row.cons.map((c, j) => <Bullet key={j}>{c}</Bullet>)}
-                            </div>
-                          </div>
-                        </Fragment>
+                        "Focus on two surfaces: the exercise creation flow for presenters, and the live completion experience for participants.",
+                        "Desktop only, to keep interaction decisions tight.",
+                        "Free tier constraints, to avoid designing around features that wouldn't be accessible to some users.",
+                        "Wooclap's existing design system — not a visual redesign.",
+                      ].map((item, i) => (
+                        <Bullet key={i}>{item}</Bullet>
                       ))}
+                    </div>
+                    <p style={{ ...BODY, maxWidth: 640 }}>
+                      Everything else — presenter's results view, analytics, edge cases — I noted but
+                      set aside. My goal was to design the most shippable solution within realistic constraints.
+                    </p>
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                    <h2 style={H2}>What to call it (and why it{"\u00a0"}matters)</h2>
+                    <p style={{ ...BODY, maxWidth: 640 }}>
+                      What to call it mattered more than it might seem. The name shapes where the exercise
+                      lives in the UI and how users understand it before they&apos;ve even clicked. In the table,
+                      you&apos;ll find a list of names I considered — along with their pros and cons. I went
+                      with &ldquo;Grouping&rdquo;, as it maps most directly to what the exercise asks participants to do,
+                      and differentiates clearly from &ldquo;Matching&rdquo; in the picker.
+                    </p>
+                    <div style={{ border: "0.5px solid #595959", overflowX: "auto" }}>
+                      <div style={{ display: "grid", gridTemplateColumns: "160px 1fr 1fr", minWidth: 480 }}>
+                        {["Proposition", "Pros", "Cons"].map((h, i) => (
+                          <div key={h} style={{ padding: "12px 24px", borderRight: i < 2 ? "0.5px solid #595959" : undefined, borderBottom: "0.5px solid #595959", background: "#f7f7f7" }}>
+                            <p style={{ ...LABEL, paddingTop: 0, position: "static" }}>{h}</p>
+                          </div>
+                        ))}
+                        {[
+                          { name: "Grouping", bold: true, pros: ["Maps directly to what participants do.", "Differentiates clearly from Matching."], cons: ["Slightly generic, but accurate."] },
+                          { name: "Sort", bold: false, pros: ["Short, active."], cons: ["Implies ordering/ranking, not grouping."] },
+                          { name: "Categorise", bold: false, pros: ["Familiar, academic framing."], cons: ["Feels formal; less intuitive as an action verb."] },
+                          { name: "Classify", bold: false, pros: ["Precise."], cons: ["Heavy and academic; low discoverability."] },
+                        ].map((row, i, arr) => (
+                          <Fragment key={row.name}>
+                            <div style={{ padding: "16px 24px", borderRight: "0.5px solid #595959", borderBottom: i < arr.length - 1 ? "0.5px solid #595959" : undefined }}>
+                              <p style={{ fontSize: 15, fontWeight: row.bold ? 600 : 400, lineHeight: 1.55, margin: 0 }}>{row.name}</p>
+                            </div>
+                            <div style={{ padding: "16px 24px", borderRight: "0.5px solid #595959", borderBottom: i < arr.length - 1 ? "0.5px solid #595959" : undefined }}>
+                              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                                {row.pros.map((p, j) => <Bullet key={j}>{p}</Bullet>)}
+                              </div>
+                            </div>
+                            <div style={{ padding: "16px 24px", borderBottom: i < arr.length - 1 ? "0.5px solid #595959" : undefined }}>
+                              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                                {row.cons.map((c, j) => <Bullet key={j}>{c}</Bullet>)}
+                              </div>
+                            </div>
+                          </Fragment>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -517,12 +512,8 @@ export default function Wooclap() {
                   If this shipped, I'd track time spent in the presenter setup flow and return usage rate.
                 </p>
                 <div style={{ display: "flex", gap: 12, paddingTop: 8 }}>
-                  <SecondaryLink href="https://www.figma.com/make/ONgCix9hVSx41azR7X3qrq/Matching-Exercise-Prototype?p=f&t=BavtyAANUsfMXRRF-0&fullscreen=1">
-                    Prototype — presenter view <ArrowUpRight size={16} />
-                  </SecondaryLink>
-                  <SecondaryLink href="https://www.figma.com/make/5U9Xg3HWMTxl0krmGjrOoQ/Interactive-Exercise-Prototype?fullscreen=1&t=au4vzxEe9KgNvyUj-1">
-                    Prototype — participant view <ArrowUpRight size={16} />
-                  </SecondaryLink>
+                  <SecondaryLink href="https://player-shout-10278062.figma.site" label="Prototype — presenter view" />
+                  <SecondaryLink href="https://polka-drill-29225007.figma.site" label="Prototype — participant view" />
                 </div>
               </div>
             </div>
@@ -563,14 +554,14 @@ export default function Wooclap() {
               client="Nationale Nederlanden"
               industry="Insurance"
               platform="Desktop"
-              title="Transforming insurance CRM — redesigning the agent experience with clearer workflows and commission tracking"
+              title="Redesigning the agent experience in an insurance CRM — unified workflows and commission tracking"
             />
             <CaseStudyCard
               href="/projects/goulash"
               client="Goulash"
               industry="Food tech"
               platform="Mobile"
-              title="Helping users find and optimize meal plans based on ingredient discounts and price tiers"
+              title="Introducing a way to communicate savings indirectly in a meal planning app"
             />
           </div>
         </div>
