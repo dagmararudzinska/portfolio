@@ -1,7 +1,10 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function Homepage() {
+  const [btnHovered, setBtnHovered] = useState(false);
+
   useEffect(() => {
     document.body.style.height = "100svh";
     document.body.style.overflow = "hidden";
@@ -28,6 +31,15 @@ export default function Homepage() {
         alignItems: "center",
         textAlign: "center",
       }}>
+        <p style={{
+          fontSize: 15,
+          fontWeight: 400,
+          lineHeight: 1.55,
+          color: "#242424",
+          margin: 0,
+        }}>
+          Hi, I&apos;m Dagmara, a
+        </p>
         <h1 style={{
           fontSize: 64,
           fontWeight: 500,
@@ -49,6 +61,27 @@ export default function Homepage() {
         }}>
           crafting digital products for humans
         </p>
+        <Link
+          href="/projects"
+          onMouseEnter={() => setBtnHovered(true)}
+          onMouseLeave={() => setBtnHovered(false)}
+          style={{
+            marginTop: 16,
+            display: "inline-block",
+            background: btnHovered ? "#ececec" : "#242424",
+            color: btnHovered ? "#242424" : "#fcfcfc",
+            padding: "12px 24px",
+            fontSize: 15,
+            fontWeight: 400,
+            lineHeight: 1.4,
+            textDecoration: "none",
+            fontFamily: "inherit",
+            border: "0.5px solid #242424",
+            transition: "background 0.2s ease, color 0.2s ease",
+          }}
+        >
+          See projects
+        </Link>
       </div>
     </div>
   );

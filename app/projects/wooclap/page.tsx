@@ -1,18 +1,21 @@
 "use client";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useRef, useLayoutEffect } from "react";
 import Footer from "@/components/Footer";
 import { ArrowUpRight, ArrowRight, View, Idea, ChevronDown, ChevronUp } from "@carbon/icons-react";
 import CaseStudyCard from "@/components/CaseStudyCard";
 import { KDD_INDEX, TAB_BAR, tabItem } from "@/lib/styles";
 
 const LABEL: React.CSSProperties = {
-  fontSize: 10,
+  fontSize: 16,
   fontWeight: 600,
   letterSpacing: "0.8px",
   textTransform: "uppercase",
   color: "#595959",
   paddingTop: 6,
   margin: 0,
+  position: "sticky",
+  top: 88,
+  alignSelf: "start",
 };
 
 const SECTION: React.CSSProperties = {
@@ -184,7 +187,18 @@ const POVS = [
 
 function PovSection() {
   const [activeTab, setActiveTab] = useState(0);
-  const pov = POVS[activeTab];
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerHeight, setContainerHeight] = useState<number>(0);
+  const [initialized, setInitialized] = useState(false);
+
+  useLayoutEffect(() => {
+    if (initialized || !containerRef.current) return;
+    const children = Array.from(containerRef.current.children) as HTMLElement[];
+    const maxH = Math.max(...children.map(c => c.offsetHeight));
+    setContainerHeight(maxH);
+    setInitialized(true);
+  }, [initialized]);
+
   return (
     <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 40 }}>
       <div />
@@ -196,7 +210,31 @@ function PovSection() {
             </div>
           ))}
         </div>
-        <PovCards findings={pov.findings} takeaways={pov.takeaways} />
+        <div
+          ref={containerRef}
+          style={{ position: "relative", height: initialized ? containerHeight : undefined }}
+        >
+          {POVS.map((pov, i) => (
+            <div
+              key={i}
+              style={
+                !initialized
+                  ? { marginBottom: i < POVS.length - 1 ? 16 : 0 }
+                  : {
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      opacity: activeTab === i ? 1 : 0,
+                      transition: "opacity 0.2s ease",
+                      pointerEvents: activeTab === i ? "auto" : "none",
+                    }
+              }
+            >
+              <PovCards findings={pov.findings} takeaways={pov.takeaways} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -251,23 +289,28 @@ export default function Wooclap() {
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", border: "0.5px solid #595959" }}>
             {[
               {
+                n: "01",
                 label: "Context",
                 text: "Wooclap is an edtech platform that helps presenters add exercises to their presentations — like quizzes, polls or open questions. What was missing was a clean way to group multiple items under a single label.",
               },
               {
+                n: "02",
                 label: "Problem",
                 text: "The platform lacked a way to test many-to-one categorisation. The closest existing format was Matching, but it only supported one-to-one logic. My task was to address this friction point in a few hours recruitment task.",
               },
               {
+                n: "03",
                 label: "Process",
-                text: "I designed “Grouping” — a new exercise type. Core decisions: introduce it as a new feature rather than expanding an existing one; use drag-and-drop; and let the UI handle feedback without interrupting the flow.",
+                text: "I designed \u201cGrouping\u201d \u2014 a new exercise type. Core decisions: introduce it as a new feature rather than expanding an existing one; use drag-and-drop; and let the UI handle feedback without interrupting the flow.",
               },
               {
+                n: "04",
                 label: "Outcomes",
                 text: "The proposal covered exercise taxonomy, interaction models, presenter configuration, participant experience, and directions for further exploration.",
               },
             ].map((card, i) => (
               <div key={card.label} style={{ padding: 32, borderRight: i % 2 === 0 ? "0.5px solid #595959" : undefined, borderBottom: i < 2 ? "0.5px solid #595959" : undefined }}>
+                <p style={{ fontSize: 10, color: "rgba(36,36,36,0.35)", margin: "0 0 4px", fontWeight: 600, letterSpacing: "0.6px" }}>{card.n}</p>
                 <p style={{ fontSize: 15, fontWeight: 600, lineHeight: 1.55, margin: "0 0 12px" }}>{card.label}</p>
                 <p style={BODY}>{card.text}</p>
               </div>
@@ -417,8 +460,8 @@ export default function Wooclap() {
                     What to call it mattered more than it might seem. The name shapes where the exercise
                     lives in the UI and how users understand it before they've even clicked. In the table,
                     you'll find a list of names I considered — along with their pros and cons. I went
-                    with “Grouping”, as it maps most directly to what the exercise asks participants to do,
-                    and differentiates clearly from “Matching” in the picker.
+                    with "Grouping", as it maps most directly to what the exercise asks participants to do,
+                    and differentiates clearly from "Matching" in the picker.
                   </p>
                   <div style={{ border: "0.5px solid #595959", overflowX: "auto" }}>
                     <div style={{ display: "grid", gridTemplateColumns: "160px 1fr 1fr", minWidth: 480 }}>
@@ -499,7 +542,7 @@ export default function Wooclap() {
                   that what you call a feature, and where it lives in the platform, shapes how people
                   understand it before they clicked it — so it's an important UX question. Getting
                   the taxonomy right was part of defining the concept itself. I'd want to
-                  pressure-test “Grouping” with real users early.
+                  pressure-test "Grouping" with real users early.
                 </p>
                 <p style={BODY}>
                   One honest note: the participant flow pulled more of my attention upfront, because

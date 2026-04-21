@@ -37,7 +37,7 @@ export default function Projects() {
             <h2 style={{ fontSize: 36, fontWeight: 500, lineHeight: 1.2, letterSpacing: "-0.54px", margin: 0 }}>
               Selected projects
             </h2>
-            <div style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ display: "grid", gridAutoRows: "1fr" }}>
               {projects.map((p) => (
                 <ProjectCard key={p.number} {...p} />
               ))}

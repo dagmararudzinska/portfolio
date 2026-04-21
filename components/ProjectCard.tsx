@@ -50,6 +50,7 @@ export default function ProjectCard({ number, title, client, industry, platform,
         color: "#242424",
         transition: "background 0.2s ease",
         cursor: "pointer",
+        height: "100%",
       }}
     >
       <span style={{

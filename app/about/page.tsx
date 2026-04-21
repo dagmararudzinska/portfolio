@@ -14,21 +14,18 @@ export default function About() {
         <main style={{ flex: 1, display: "flex", alignItems: "center" }}>
           <div style={{ maxWidth: 1280, margin: "0 auto", padding: "80px 80px 160px", width: "100%", boxSizing: "border-box" }}>
             <div style={{ maxWidth: 720, display: "flex", flexDirection: "column", gap: 40 }}>
-              <h1 style={{ fontSize: 64, fontWeight: 500, lineHeight: 1.04, letterSpacing: "-1.408px", margin: 0 }}>
-                Hello!
-              </h1>
               <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                 <p style={{ fontSize: 15, fontWeight: 400, lineHeight: 1.55, margin: 0 }}>
-                  I&apos;m Dagmara, a product designer from Warsaw, currently based in Paris.
+                  Hi, I&apos;m Dagmara, a product designer from Warsaw, currently based in Paris.
                 </p>
                 <p style={{ fontSize: 15, fontWeight: 400, lineHeight: 1.55, margin: 0 }}>
-                  For the last years I&apos;ve been working across various industries, such as fintech, insurance, lifestyle or edtech. What interests me the most in my job is discovering how people interact with websites and apps, what annoys them and how it can be fixed.
+                  Over the last few years, I&apos;ve worked in a bunch of different industries, like fintech, insurance, lifestyle and edtech. What I like most about my job is finding out how people use websites and apps, what annoys them and how to fix it.
                 </p>
                 <p style={{ fontSize: 15, fontWeight: 400, lineHeight: 1.55, margin: 0 }}>
-                  I frame problems through research, map workflows, and find where design can make the biggest impact.
+                  I approach problems by doing research, analysing workflows and figuring out where design can have the biggest impact.
                 </p>
                 <p style={{ fontSize: 15, fontWeight: 400, lineHeight: 1.55, margin: 0 }}>
-                  When I&apos;m not working, I&apos;m probably eating something good, working out the steps on a dance floor (currently deep in ballroom and Argentinian tango) or finding the nicest coffee shop in the area.
+                  When I&apos;m not working, I&apos;m probably eating something good, working out the steps on a dance floor (currently deep in ballroom &ndash; quickstep is my favourite) or finding the nicest coffee shop in the area.
                 </p>
               </div>
               <Link

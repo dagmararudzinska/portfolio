@@ -6,13 +6,16 @@ import { View, Idea, Star, Growth, ArrowRight, ChevronDown, ChevronUp } from "@c
 import { KDD_INDEX } from "@/lib/styles";
 
 const LABEL: React.CSSProperties = {
-  fontSize: 10,
+  fontSize: 16,
   fontWeight: 600,
   letterSpacing: "0.8px",
   textTransform: "uppercase",
   color: "#595959",
   paddingTop: 6,
   margin: 0,
+  position: "sticky",
+  top: 88,
+  alignSelf: "start",
 };
 
 const SECTION: React.CSSProperties = {
@@ -96,26 +99,26 @@ function ReadMoreButton({ expanded, onToggle, label }: { expanded: boolean; onTo
 
 const designRows = [
   {
-    insight: "People are often on the lookout for sales-specific categories, so they should be easy to find.",
+    insight: "People often look for sales-specific categories, so they should be easy to find.",
     decision: "Use a separate filter to find recipes that include discounted ingredients.",
-    matters: "Users who start with a budget goal can immediately browse cost-optimized recipes instead of discovering discounts by chance.",
-    impact: "Reduces time spent searching and supports price-driven meal planning.",
+    matters: "If a user has a specific budget in mind, they can find recipes that are good value for money right away, instead of discovering discounts by chance.",
+    impact: "It saves time and helps to plan meals based on the price of ingredients.",
   },
   {
-    insight: "Users judge how valuable something is when they see the numbers.",
-    decision: "Information about discounts can be found right next to the recipe. On the shopping cart level, the original price is shown next to the discounted one so the customer can compare the two prices.",
-    matters: "The generated shopping list becomes instantly scannable for savings, helping users understand how the total cost is calculated.",
-    impact: "Faster cost comparison and clearer perception of savings.",
+    insight: "People are more likely to choose something when the price is lower.",
+    decision: "Info about discounts is right next to the recipe. On the shopping cart level, the original price is shown next to the discounted one so the customer can compare the two prices.",
+    matters: "Users are more satisfied when they see how useful the product is and how much they can save.",
+    impact: "It\u2019s quicker to compare costs and easier to see how much is saved.",
   },
   {
-    insight: "People see the same discount as more valuable if it is presented as the larger number.",
-    decision: "Show the most meaningful savings — as a percentage or as an absolute amount. This was flagged for A/B testing.",
-    matters: "Users can quickly identify which ingredients create the biggest budget impact.",
+    insight: "People tend to see the same discount as more valuable if it\u2019s presented as the larger number.",
+    decision: "Show the most meaningful savings \u2014 as a percentage or as an absolute amount. We\u2019ve flagged this for A/B testing.",
+    matters: "Users can quickly see which recipes have the biggest impact on the budget.",
     impact: "Stronger perception of value when optimizing the shopping list.",
   },
   {
-    insight: "Symbols alone don't always help users to understand what they can expect. They need something to base their ideas on.",
-    decision: "The cost tiers (lowest, medium, highest price) show you the price range for each tier.",
+    insight: "Symbols alone don\u2019t always help users to understand what they can expect. They need info to base their ideas on.",
+    decision: "The cost tiers (lowest, medium, highest price) show the price range for each tier.",
     matters: "A labelled tier sets a concrete spending expectation before users commit to a meal plan.",
     impact: "Planning meals takes less time.",
   },
@@ -189,7 +192,7 @@ export default function Goulash() {
             ))}
           </div>
           <h2 style={{ fontSize: 64, fontWeight: 500, lineHeight: 1.04, letterSpacing: "-1.408px", margin: 0, width: "100%" }}>
-            Helping users find and optimize meal plans based on ingredient discounts and price tiers
+            Introducing a way to communicate savings indirectly in a meal planning app
           </h2>
         </section>
 
@@ -199,23 +202,28 @@ export default function Goulash() {
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", border: "0.5px solid #595959" }}>
             {[
               {
+                n: "01",
                 label: "Context",
-                text: "Goulash is an app that helps people plan meals by offering recipes and ordering groceries directly from the same app. The idea is to help users save money, reduce food waste, and spend less time deciding what to cook.",
+                text: "Goulash is a meal planning app that sits between recipe discovery and grocery delivery. The idea is to help users save money, reduce food waste, and spend less time deciding what to cook.",
               },
               {
+                n: "02",
                 label: "Problem",
-                text: "The main idea is that you can save money. But when I joined the project, there was nothing showing savings in the user interface.",
+                text: "The main idea is that you can save money. However, when I joined the project, there was no indication of savings in the user interface.",
               },
               {
+                n: "03",
                 label: "Process",
-                text: "At first, I suggested setting a price for each meal, but I had to change my idea because we couldn't show specific discounts or prices for individual meals because of local laws. I had to come up with indirect signals that people would still believe.",
+                text: "After some research and benchmarking, I prepared communication based on showing a price for each meal. But I had to change my idea because it turned out we couldn\u2019t show specific discounts or prices for individual meals because of local laws. I had to come up with indirect signals that people would still believe.",
               },
               {
+                n: "04",
                 label: "Outcomes",
-                text: "A savings banner on the recipe page, with a popup explaining how the discount is calculated and which specific ingredients are discounted.",
+                text: "I\u2019ve created a set of ways to communicate indirect savings, including a tab with only discounted recipes, a banner informing about discounted ingredients within a recipe, or a drawer explaining and defining pricing tiers. The patterns have been added and are available in the app in the form I designed them.",
               },
             ].map((card, i) => (
               <div key={card.label} style={{ padding: 32, borderRight: i % 2 === 0 ? "0.5px solid #595959" : undefined, borderBottom: i < 2 ? "0.5px solid #595959" : undefined }}>
+                <p style={{ fontSize: 10, color: "rgba(36,36,36,0.35)", margin: "0 0 4px", fontWeight: 600, letterSpacing: "0.6px" }}>{card.n}</p>
                 <p style={{ fontSize: 15, fontWeight: 600, lineHeight: 1.55, margin: "0 0 12px" }}>{card.label}</p>
                 <p style={BODY}>{card.text}</p>
               </div>
@@ -225,13 +233,16 @@ export default function Goulash() {
 
         {/* Hero visual */}
         <div style={{ paddingTop: 40, paddingBottom: 120, display: "flex", flexDirection: "column", gap: 12 }} className="reveal">
-          <img
-            src="/goulash-hero.gif"
-            alt="Goulash savings experience — discount badges, deals filter, and savings popup"
-            style={{ width: "100%", height: "auto", display: "block" }}
-          />
+          <div style={{ position: "relative" }}>
+            <img
+              src="/goulash-hero.gif"
+              alt="Goulash savings experience \u2014 discount badges, deals filter, and savings popup"
+              style={{ width: "100%", height: "auto", display: "block" }}
+            />
+            <div style={{ position: "absolute", inset: 0, border: "0.5px solid #D4D4D2", pointerEvents: "none" }} />
+          </div>
           <p style={CAPTION}>
-            The redesigned cookbook experience — Deals tab for filtered browsing, discount badges on recipe cards, and a savings popup on entry.
+            The redesigned cookbook experience highlights savings from the start. I added a &lsquo;deals&rsquo; tab for filtered browsing and put discount badges on recipe cards. I also explained the price tiers and how the discount value is calculated.
           </p>
         </div>
 
@@ -242,23 +253,23 @@ export default function Goulash() {
             {[
               {
                 n: "01",
-                title: "Filter added to find recipes based on discounts for budget options.",
-                text: "Budget goals enable browsing of cost-optimized recipes immediately.",
+                title: "Introduced a dedicated tab for recipes with discounts.",
+                text: "It makes it easier for people to find recipes with a focus on budget-friendly choices.",
               },
               {
                 n: "02",
-                title: "Price comparisons display original and discounted prices for obvious savings.",
-                text: "Shopping cart highlights savings for easy total cost tracking.",
+                title: "Highlighted meals that included discounted ingredients with eye-catching badges.",
+                text: "So that it\u2019s instantly clear which meals are cheaper and by what percent.",
               },
               {
                 n: "03",
-                title: "Clear cost tiers with price ranges provide a quick, transparent spending overview.",
-                text: "Tier labels set clear spending expectations before meal plan selection.",
+                title: "I\u2019ve added clear explanations to the price tiers and how discounts are calculated.",
+                text: "At first, the price tiers were just $ symbols with no explanation. I gave them some exact figures on price ranges to make it clear how much the meal would cost. I also included some info on how discounts are calculated and what the approximate percentage actually means.",
               },
               {
                 n: "04",
-                title: "Savings shown as percentage or dollar amount for clarity.",
-                text: "Ingredients impacting budget are highlighted for smarter choices.",
+                title: "Shopping cart highlights savings for easy total cost tracking.",
+                text: "Price comparisons show the original price and the discounted price, so users can easily spot savings.",
               },
             ].map((item, i, arr) => (
               <div
@@ -294,19 +305,12 @@ export default function Goulash() {
               <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 40 }}>
                 <p style={LABEL}>Discovery</p>
                 <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                  <h2 style={H2}>The promise wasn't visible</h2>
+                  <h2 style={H2}>The promise wasn&apos;t obvious</h2>
                   <p style={{ ...BODY, maxWidth: 640 }}>
-                    The constraint became clear gradually. Final costs in Goulash depend on too many
-                    variables: how many meals are in a plan, how many products overlap between recipes,
-                    which provider the user selects. Showing a single “you'll save X” figure would be
-                    misleading.
+                    The constraint became clear over time. My first idea was to show prices per meal &mdash; a simple, easy-to-read signal for people who want to watch their spending. It was reviewed by the legal team and flagged up. That&apos;s when the problem shifted from how do we show savings to how do we communicate value without disclosing amounts.
                   </p>
                   <p style={{ ...BODY, maxWidth: 640 }}>
-                    Local commerce laws added a further restriction on displaying specific discount
-                    amounts. We couldn't show numbers. My initial proposal was a price-per-meal view
-                    — a clean, scannable signal for budget-conscious users. Legal reviewed it and
-                    flagged it. That's when the problem shifted from “how do we show savings” to
-                    “how do we communicate value without disclosing amounts”.
+                    The final cost of meals in the Goulash app depends on a bunch of different things: how many meals are added to a plan, how many products are shared between recipes, and which provider the user chooses. It would be misleading to show just one &ldquo;you&apos;ll save X&rdquo; figure.
                   </p>
                 </div>
               </div>
@@ -318,32 +322,36 @@ export default function Goulash() {
                 <p style={LABEL}>Process</p>
                 <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                   <h2 style={H2}>The reasons behind the design choices</h2>
-                  <p style={BODY}>The full decision chain — each row traces a single insight to its design response and the reasoning behind it.</p>
+                  <p style={BODY}>The full decision chain &mdash; each row shows a single insight to its design response and the reasoning behind it.</p>
                 </div>
               </div>
               <DesignChoicesTable />
+              <p style={{ ...CAPTION, marginTop: 12 }}>
+                The full decision chain &mdash; each row shows a single insight to its design response and the reasoning behind it.
+              </p>
             </div>
 
             {/* Outcomes */}
             <div style={{ ...SECTION, paddingTop: 80 }} className="reveal">
               <p style={LABEL}>Outcomes</p>
               <div style={{ display: "flex", flexDirection: "column", gap: 16, maxWidth: 720 }}>
-                <h2 style={H2}>A set of consistent communication patterns that are now part of the app</h2>
+                <h2 style={H2}>A set of ways to communicate value of the app</h2>
                 <p style={BODY}>
-                  I can't point to any metrics because I wasn't on the project long enough to see
-                  any post-launch data. What I can say is that the way it's set up hasn't changed
-                  since it was released.
+                  I came up with a set of rules to inform users about the main value of the app &mdash; savings on groceries, together with delivering additional and updated components. I can&apos;t point to any metrics because I wasn&apos;t on the project long enough to see any post-launch data. What I can say is that the way it&apos;s set up hasn&apos;t changed since it was released.
                 </p>
               </div>
             </div>
 
             {/* Components visual */}
             <div style={{ paddingTop: 40, paddingBottom: 120, display: "flex", flexDirection: "column", gap: 12 }} className="reveal">
-              <img
-                src="/goulash-components.png"
-                alt="Goulash savings components — recipe page with banner and cart with discounted ingredients"
-                style={{ width: "100%", height: "auto", display: "block" }}
-              />
+              <div style={{ position: "relative" }}>
+                <img
+                  src="/goulash-components.png"
+                  alt="Goulash savings components \u2014 recipe page with banner and cart with discounted ingredients"
+                  style={{ width: "100%", height: "auto", display: "block" }}
+                />
+                <div style={{ position: "absolute", inset: 0, border: "0.5px solid #D4D4D2", pointerEvents: "none" }} />
+              </div>
               <p style={CAPTION}>
                 A savings banner on the recipe page, with a popup explaining how the discount is calculated and which specific ingredients are discounted.
               </p>
@@ -354,22 +362,17 @@ export default function Goulash() {
               <p style={LABEL}>Reflections</p>
               <div style={{ display: "flex", flexDirection: "column", gap: 24, maxWidth: 720 }}>
                 <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                  <h2 style={H2}>What I'd track to measure future impact:</h2>
+                  <h2 style={H2}>What I&apos;d track to measure future impact:</h2>
                   <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                    <Bullet>Compare the number of discounted recipes selected with the number of regular-price ones.</Bullet>
-                    <Bullet>Analyse what percentage of people finish the meal plans with an order.</Bullet>
-                    <Bullet>Conduct interviews to find out what people think about how clear and trustworthy the given information is.</Bullet>
+                    <Bullet>Selection rate of discounted recipes.</Bullet>
+                    <Bullet>Conversion from meal plan to shopping list.</Bullet>
+                    <Bullet>I&apos;d also like to run some qualitative interviews to see how clear and trustworthy the communication seems.</Bullet>
                   </div>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 16, marginTop: 40 }}>
-                  <h2 style={H2}>Learnings on indirect design</h2>
+                  <h2 style={H2}>Thoughts on designing with strong constraints</h2>
                   <p style={BODY}>
-                    The restriction on showing specific amounts forced a more careful look at what information users actually need at each step, and where in the interface they need it. The constraint made the communication more precise.
-                  </p>
-                  <p style={BODY}>
-                    Microcopy turned out to be more important than I'd expected. A badge without an
-                    explanation creates doubt. The same badge, paired with a clear label and appropriate
-                    context, builds trust. This is something I have learned from working on this project.
+                    The rule about not showing certain amounts made us think more carefully about what information users need at each step and where on the screen they need it. The constraint made the communication more precise. Also, I found that microcopy was more important than I thought it would be.
                   </p>
                 </div>
               </div>
@@ -393,7 +396,7 @@ export default function Goulash() {
               client="Nationale Nederlanden"
               industry="Insurance"
               platform="Desktop"
-              title="Transforming insurance CRM — redesigning the agent experience with clearer workflows and commission tracking"
+              title="Redesigning the agent experience in an insurance CRM \u2014 unified workflows and commission tracking"
             />
           </div>
         </div>

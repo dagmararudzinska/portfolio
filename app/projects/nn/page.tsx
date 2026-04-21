@@ -6,13 +6,16 @@ import { KDD_INDEX } from "@/lib/styles";
 import { ChevronDown, ChevronUp } from "@carbon/icons-react";
 
 const LABEL: React.CSSProperties = {
-  fontSize: 10,
+  fontSize: 16,
   fontWeight: 600,
   letterSpacing: "0.8px",
   textTransform: "uppercase",
   color: "#595959",
   paddingTop: 6,
   margin: 0,
+  position: "sticky",
+  top: 88,
+  alignSelf: "start",
 };
 
 const SECTION: React.CSSProperties = {
@@ -104,7 +107,7 @@ export default function NN() {
             ))}
           </div>
           <h2 style={{ fontSize: 64, fontWeight: 500, lineHeight: 1.04, letterSpacing: "-1.408px", margin: 0, width: "100%" }}>
-            Transforming insurance CRM — redesigning the agent experience with clearer workflows and commission tracking
+            Redesigning the agent experience in an insurance CRM &mdash; unified workflows and commission tracking
           </h2>
         </section>
 
@@ -114,23 +117,28 @@ export default function NN() {
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", border: "0.5px solid #595959" }}>
             {[
               {
+                n: "01",
                 label: "Context",
-                text: "Nationale Nederlanden is an insurance company. My task was to simplify agents' workflow in K2 — their customer relationship management (CRM) platform.",
+                text: "Nationale Nederlanden is an insurance provider. They\u2019ve got a pretty complex set of internal tools, and my job was to make the agent\u2019s workflow in their CRM platform, called K2, a bit easier.",
               },
               {
+                n: "02",
                 label: "Problem",
-                text: "Agents managed clients in one platform and made sales across three others, depending on the insurance type. Each time a sale happened, they had to switch platforms, rewrite data that didn't sync, and manually report outcomes.",
+                text: "The problem was that agents were managing clients on one platform and making sales on three others (depending on the insurance type that was being sold). So, every sale meant having to do a bunch of things like switching between tools, rewriting data that didn\u2019t sync and manually reporting outcomes, and so on.",
               },
               {
+                n: "03",
                 label: "Process",
-                text: "I mapped research onto the actual end-to-end workflow across both platforms and designed a new way of connecting CRM to sales — focusing on lead management, client database, and daily prioritisation.",
+                text: "I joined after the research had already been done. I came in at synthesis, which basically means mapping findings onto the actual workflow across both platforms, then designing a model that connected client context to sales action.",
               },
               {
+                n: "04",
                 label: "Outcomes",
-                text: "The work went through two design iterations and was tested with real insurance agents in usability sessions. The end result was a set of high-quality screen designs and prototypes.",
+                text: "The work covered three main areas: lead management, client database and daily prioritisation. We created some high-fidelity prototypes for user testing and engineering handoff.",
               },
             ].map((card, i) => (
               <div key={card.label} style={{ padding: 32, borderRight: i % 2 === 0 ? "0.5px solid #595959" : undefined, borderBottom: i < 2 ? "0.5px solid #595959" : undefined }}>
+                <p style={{ fontSize: 10, color: "rgba(36,36,36,0.35)", margin: "0 0 4px", fontWeight: 600, letterSpacing: "0.6px" }}>{card.n}</p>
                 <p style={{ fontSize: 15, fontWeight: 600, lineHeight: 1.55, margin: "0 0 12px" }}>{card.label}</p>
                 <p style={BODY}>{card.text}</p>
               </div>
@@ -143,13 +151,13 @@ export default function NN() {
           <div style={{ position: "relative" }}>
             <img
               src="/nn-hero.gif"
-              alt="Nationale Nederlanden CRM — starting a sales process"
+              alt="Nationale Nederlanden CRM \u2014 dashboard improvements"
               style={{ width: "100%", height: "auto", display: "block" }}
             />
             <div style={{ position: "absolute", inset: 0, border: "0.5px solid #D4D4D2", pointerEvents: "none" }} />
           </div>
           <p style={CAPTION}>
-            One of the key enhancements was to allow insurance agents to start sales from their CRM platform. I achieved that by adding a simple icon button in the side menu.
+            The main thing we did was improve the dashboard. We did that by adding a simple icon button in the side menu, which let insurance agents start selling straight from their CRM platform. There were also a few other changes, like adding a box to estimate commissions, a button to start online meetings from the platform and a new way of organising actions based on their priority.
           </p>
         </div>
 
@@ -160,23 +168,23 @@ export default function NN() {
             {[
               {
                 n: "01",
-                title: "Sales entry points in different context",
-                text: "I added direct sales entry points in side navigation bar which is always accessible, as well as inside client and lead details so agents can start quotes or policies without losing client context. Thanks to that, they have a quick shortcut to start sales within different workflows.",
+                title: "Entry points for starting a sale",
+                text: "Added sales entry points in the nav bar and inside client and lead detail pages. Agents can start a quote or policy from wherever they already are, without losing context.",
               },
               {
                 n: "02",
-                title: "A sales dashboard that drives action",
-                text: "The old dashboard didn't highlight time-sensitive or urgent actions. I redesigned it by adding tagged boxes with different type of urgent actions (like “contact requests” or “problems with payments”) and introducing them in the dashboard as actions to take.",
+                title: "A dashboard that surfaces action",
+                text: "The old dashboard didn\u2019t show urgent actions. The redesign added tagged action items, like contact requests and payment issues, directly on the dashboard.",
               },
               {
                 n: "03",
-                title: "One place for lead details",
-                text: "Leads info was scattered across platforms, making agents jump between K2 and sales records, sometimes with mismatched data. I created a unified Leads details and Clients details pages that combine insurance needs, sales status, and next steps.",
+                title: "One place for lead and client details",
+                text: "Lead information was split across platforms, sometimes with mismatched data. A unified lead and client detail page pulls together insurance needs, sales status, and next steps in one place.",
               },
               {
                 n: "04",
-                title: "New component informing about earning predictions on the dashboard",
-                text: "Added a section to the agency app dashboard with a summary of sales results in numbers. It presents an approximate commission amount based on an algorithm that analyzes premiums from reported policy sales. Data is dynamically updated based on sales system data, allowing agents to easily view a summary of goal achievement and their estimated sales bonus.",
+                title: "Commission summary on the dashboard",
+                text: "Agents never really knew how much they were going to earn by the end of the month, so they had to calculate it themselves. We\u2019ve added a commission summary to the dashboard. It estimates a bonus from reported policy premiums, updates automatically from sales system data, and gives agents a running view of where they stand against their targets.",
               },
             ].map((item, i, arr) => (
               <div
@@ -212,12 +220,9 @@ export default function NN() {
               <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 40, paddingBottom: 56 }}>
                 <p style={LABEL}>Discovery</p>
                 <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                  <h2 style={H2}>The tools worked, but they weren't connected</h2>
+                  <h2 style={H2}>The tools worked, but they weren&apos;t connected</h2>
                   <p style={BODY}>
-                    The researcher had already run interviews with agents before I joined. I came in
-                    at synthesis — mapping what they'd heard onto the actual end-to-end workflow
-                    across both platforms. Three friction clusters were identified during synthesis.
-                    The following categories of issues caused problems due to the gap between K2 and ONE:
+                    Research synthesis mapped the findings onto the actual workflow across K2 and ONE, which helped us identify three areas causing difficulties:
                   </p>
                 </div>
               </div>
@@ -227,25 +232,24 @@ export default function NN() {
                   {
                     title: "Integration with sales systems",
                     findings: [
-                      "Agents had to leave the CRM to make a sale, which meant losing context. The process required agents to log in to different platforms and enter information that was already known.",
-                      "The sales data wasn't automatically sent back to the CRM system, so agents had to make manual reports.",
-                      "The agent's commission was not visible, so they never knew exactly how much they would earn.",
+                      "Agents had to leave the CRM to complete a sale, which broke the context and forced them to do manual reporting.",
+                      "The sales data didn\u2019t flow back automatically. It was also missing commission visibility.",
+                      "One process required multiple logins.",
                     ],
                   },
                   {
                     title: "Dashboard & navigation",
                     findings: [
-                      "The CRM was not the agents' main tool for making decisions.",
-                      "The important information was spread across different platforms. There was a lot of switching between different contexts.",
-                      "The way the client database was set up didn't match the way people actually worked.",
+                      "The CRM wasn\u2019t the agents\u2019 main tool for decision-making, and key information was spread across different platforms.",
+                      "The client database filtering didn\u2019t show the actual workflows.",
                     ],
                   },
                   {
                     title: "Lead management",
                     findings: [
-                      "The leads did not have useful labels.",
-                      "Managers couldn't choose which leads were assigned to which agents.",
-                      "The sales funnel didn't have a category for storing leads that might convert in the future.",
+                      "The leads were a bit all over the place, with no real structure, priorities or clear ownership.",
+                      "There weren\u2019t any quality indicators, like in the future-potential category.",
+                      "Managers couldn\u2019t manage the distribution of leads between agents.",
                     ],
                   },
                 ].map((cat, i) => (
@@ -275,7 +279,7 @@ export default function NN() {
               <p style={CAPTION}>
                 I introduced direct entry points into sales platforms from within client and lead views.
                 Agents could initiate a quote or policy workflow without needing to open the respective
-                sales platform and rewriting client's data.
+                sales platform and rewriting client&apos;s data.
               </p>
             </div>
 
@@ -283,29 +287,23 @@ export default function NN() {
             <div style={{ ...SECTION, paddingTop: 120 }} className="reveal">
               <p style={LABEL}>Outcomes</p>
               <div style={{ display: "flex", flexDirection: "column", gap: 24, maxWidth: 720 }}>
-                <h2 style={H2}>The work went through two design iterations and was tested with real insurance agents in usability sessions</h2>
+                <h2 style={H2}>Two iterations, tested with agents in usability sessions</h2>
                 <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                   <p style={{ fontSize: 15, fontWeight: 600, lineHeight: 1.55, margin: 0 }}>What shaped the second iteration:</p>
                   <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                     <Bullet>
-                      The sales dashboard showed commission amounts by default. Agents pointed this out quickly — they needed the option to hide it. Commission info is important, but not something that should always be visible. We added visibility controls.
+                      The commission widget showed amounts by default. Agents wanted to be able to hide it because it wasn&apos;t always convenient to have it visible. So we&apos;ve added visibility controls.
                     </Bullet>
                     <Bullet>
-                      The icon used to start a new sale didn't work. We used a similar, but simpler
-                      one, which turned out to be more legible.
+                      The sale entry point used an icon that was a bit hard to read. We replaced it with a simpler one.
                     </Bullet>
                     <Bullet>
-                      The more important discovery was about what counted as “initiating a sale”.
-                      Agents needed this feature not only to issue new policies but also to process
-                      policy changes on anniversary dates and as part of sales campaigns. This was
-                      the biggest change between versions.
+                      The most important change: We need a &lsquo;Start Sale&rsquo; button to cover more use cases. Agents needed it for anniversary changes and campaign sales, too. The first version treated it as a single action, which was to start a new sale. The second one made it an upsell entry point as well. That had a big impact on the flow structure &mdash; the biggest change between rounds.
                     </Bullet>
                   </div>
                 </div>
                 <p style={BODY}>
-                  The prototypes were delivered for engineering handoff. The design model established
-                  a clear pattern for how K2 and sales engines could operate as a single workflow
-                  surface, which set a baseline for future integration work.
+                  Once we&apos;d done the user testing, we&apos;d got the designs and prototypes ready for the engineering handoff. The model showed how K2 and the sales platforms could operate as one surface, and it became the starting point for future integration work.
                 </p>
               </div>
             </div>
@@ -315,27 +313,20 @@ export default function NN() {
               <p style={LABEL}>Reflections</p>
               <div style={{ display: "flex", flexDirection: "column", gap: 24, maxWidth: 720 }}>
                 <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                  <h2 style={H2}>What I'd track to measure future impact:</h2>
+                  <h2 style={H2}>What I&apos;d track to measure future impact:</h2>
                   <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                     {[
-                      "How long it takes from getting a lead to making a sale",
-                      "How many leads are converted into policies",
-                      "How many long-term tasks have been completed and how satisfied agents are with the changes",
+                      "Time from lead qualification to sales initiation",
+                      "Number of platform switches per completed sales flow",
+                      "Lead-to-policy conversion rate",
+                      "Long-term agent task completion rate and satisfaction",
                     ].map((item, i) => <Bullet key={i}>{item}</Bullet>)}
                   </div>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 16, marginTop: 40 }}>
-                  <h2 style={H2}>Learnings on designing across organisational lines</h2>
+                  <h2 style={H2}>Learnings</h2>
                   <p style={BODY}>
-                    The friction was mainly a structural problem. Platforms had grown independently
-                    because they were built independently. Design can bridge that gap.
-                  </p>
-                  <p style={BODY}>
-                    The other thing worth saying: I came into this project after the research was done.
-                    Working from someone else's synthesis means you're always one inference away from
-                    misreading it. I mapped it carefully, but the value of having the researcher in
-                    the room during design reviews was that they could push back when I'd drifted.
-                    That's a collaboration pattern I'd replicate.
+                    I joined after the research was finished. If you&apos;re going off someone else&apos;s synthesis, you might end up misinterpreting it. It was really helpful to have the researcher in design reviews. They could explain problems more clearly, tweak ideas or challenge them if they were wrong. It just goes to show that working together and talking things through are the key to finding the best solution.
                   </p>
                 </div>
               </div>
