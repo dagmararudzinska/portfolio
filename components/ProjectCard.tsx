@@ -42,7 +42,7 @@ export default function ProjectCard({ number, title, client, industry, platform,
       style={{
         display: "flex",
         flexDirection: "row",
-        alignItems: "center",
+        alignItems: "flex-start",
         gap: isMobile ? 16 : 64,
         padding: isMobile ? "20px 16px" : "32px 40px",
         borderLeft: "0.5px solid #242424",

@@ -18,7 +18,10 @@ export default function CaseStudyGrid({ cards }: { cards: [CardProps, CardProps]
   const isMobile = useIsMobile();
 
   useLayoutEffect(() => {
-    if (isMobile) return;
+    if (isMobile) {
+      setTitleMinHeight(undefined);
+      return;
+    }
     if (!ref0.current || !ref1.current) return;
     const h0 = ref0.current.offsetHeight;
     const h1 = ref1.current.offsetHeight;

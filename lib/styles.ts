@@ -23,6 +23,14 @@ export const TAB_BAR: CSSProperties = {
   borderBottom: "0.5px solid #D4D4D2",
 };
 
+export const TAB_BAR_MOBILE: CSSProperties = {
+  width: "100%",
+  display: "flex",
+  flexDirection: "column",
+  gap: 0,
+  borderBottom: "0.5px solid #D4D4D2",
+};
+
 // Individual tab item
 export function tabItem(isActive: boolean): CSSProperties {
   return {

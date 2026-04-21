@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import { ArrowUpRight, ArrowRight, View, Idea, ChevronDown, ChevronUp } from "@carbon/icons-react";
 import CaseStudyGrid from "@/components/CaseStudyGrid";
 import { useIsMobile } from "@/hooks/useIsMobile";
-import { KDD_INDEX, TAB_BAR, tabItem } from "@/lib/styles";
+import { KDD_INDEX, TAB_BAR, TAB_BAR_MOBILE, tabItem } from "@/lib/styles";
 
 const LABEL: React.CSSProperties = {
   fontSize: 16,
@@ -235,9 +235,9 @@ function PovSection() {
   if (isMobile) {
     return (
       <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-        <div style={TAB_BAR}>
+        <div style={TAB_BAR_MOBILE}>
           {POVS.map((p, i) => (
-            <div key={i} style={tabItem(activeTab === i)} onClick={() => setActiveTab(i)}>
+            <div key={i} style={{ ...tabItem(activeTab === i), textAlign: "left", borderBottom: activeTab === i ? "1px solid #242424" : "0.5px solid #D4D4D2", marginBottom: 0, whiteSpace: "normal" }} onClick={() => setActiveTab(i)}>
               {p.label}
             </div>
           ))}
@@ -317,7 +317,7 @@ export default function Wooclap() {
 
   return (
     <div style={{ background: "#fcfcfc", fontFamily: "'Instrument Sans', sans-serif", color: "#242424" }}>
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: isMobile ? "0 20px" : "0 80px" }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: isMobile ? "0 20px" : "0 80px", overflowX: "hidden" }}>
 
         {/* Hero */}
         <section style={{ paddingTop: isMobile ? 40 : 80, paddingBottom: isMobile ? 60 : 120, display: "flex", flexDirection: "column", gap: 24 }}>
