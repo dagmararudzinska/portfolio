@@ -1,5 +1,7 @@
+"use client";
 import Footer from "@/components/Footer";
 import ProjectCard from "@/components/ProjectCard";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const projects = [
   {
@@ -29,12 +31,13 @@ const projects = [
 ];
 
 export default function Projects() {
+  const isMobile = useIsMobile();
   return (
     <div style={{ background: "#fcfcfc", fontFamily: "'Instrument Sans', sans-serif", color: "#242424" }}>
       <div style={{ minHeight: "calc(100svh - 73px)", display: "flex", flexDirection: "column" }}>
         <main style={{ flex: 1, display: "flex", alignItems: "center" }}>
-          <div style={{ maxWidth: 1280, margin: "0 auto", padding: "80px 80px 160px", width: "100%", boxSizing: "border-box", display: "flex", flexDirection: "column", gap: 40 }}>
-            <h2 style={{ fontSize: 36, fontWeight: 500, lineHeight: 1.2, letterSpacing: "-0.54px", margin: 0 }}>
+          <div style={{ maxWidth: 1280, margin: "0 auto", padding: isMobile ? "40px 20px 80px" : "80px 80px 160px", width: "100%", boxSizing: "border-box", display: "flex", flexDirection: "column", gap: 40 }}>
+            <h2 style={{ fontSize: isMobile ? 24 : 36, fontWeight: 500, lineHeight: 1.2, letterSpacing: "-0.54px", margin: 0 }}>
               Selected projects
             </h2>
             <div style={{ display: "grid", gridAutoRows: "1fr", borderTop: "0.5px solid #242424" }}>

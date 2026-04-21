@@ -2,6 +2,7 @@
 import { ArrowUpRight } from "@carbon/icons-react";
 import { useState } from "react";
 import Link from "next/link";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 function FooterLink({ href, label, external }: { href: string; label: string; external?: boolean }) {
   const [hovered, setHovered] = useState(false);
@@ -65,9 +66,10 @@ function FooterLink({ href, label, external }: { href: string; label: string; ex
 }
 
 export default function Footer() {
+  const isMobile = useIsMobile();
   return (
-    <footer id="contact" style={{ borderTop: "0.5px solid #595959", background: "#fcfcfc", fontFamily: "'Instrument Sans', sans-serif", padding: "64px 80px" }}>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40 }}>
+    <footer id="contact" style={{ borderTop: "0.5px solid #595959", background: "#fcfcfc", fontFamily: "'Instrument Sans', sans-serif", padding: isMobile ? "40px 20px" : "64px 80px" }}>
+      <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 40 }}>
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
           <p style={{ fontSize: 20, fontWeight: 600, letterSpacing: "-0.2px", color: "#242424", lineHeight: 1.2, margin: 0 }}>
             Let&apos;s work together

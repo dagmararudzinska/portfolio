@@ -2,6 +2,7 @@
 import { Fragment, useState } from "react";
 import Footer from "@/components/Footer";
 import CaseStudyGrid from "@/components/CaseStudyGrid";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { KDD_INDEX } from "@/lib/styles";
 import { ChevronDown, ChevronUp } from "@carbon/icons-react";
 
@@ -90,14 +91,17 @@ function ReadMoreButton({ expanded, onToggle, label }: { expanded: boolean; onTo
 }
 
 export default function NN() {
+  const isMobile = useIsMobile();
+  const S = { ...SECTION, gridTemplateColumns: isMobile ? "1fr" : "1fr 2fr", paddingBottom: isMobile ? 60 : 120, gap: isMobile ? 24 : 40 };
+  const L: React.CSSProperties = { ...LABEL, position: isMobile ? "static" : "sticky" };
   const [expanded, setExpanded] = useState(false);
 
   return (
     <div style={{ background: "#fcfcfc", fontFamily: "'Instrument Sans', sans-serif", color: "#242424" }}>
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 80px" }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: isMobile ? "0 20px" : "0 80px" }}>
 
         {/* Hero */}
-        <section style={{ paddingTop: 80, paddingBottom: 120, display: "flex", flexDirection: "column", gap: 24 }}>
+        <section style={{ paddingTop: isMobile ? 40 : 80, paddingBottom: isMobile ? 60 : 120, display: "flex", flexDirection: "column", gap: 24 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
             {["Nationale Nederlanden", "Insurance", "Desktop"].map((item, i) => (
               <Fragment key={i}>
@@ -106,15 +110,15 @@ export default function NN() {
               </Fragment>
             ))}
           </div>
-          <h2 style={{ fontSize: 64, fontWeight: 500, lineHeight: 1.04, letterSpacing: "-1.408px", margin: 0, width: "100%" }}>
+          <h2 style={{ fontSize: isMobile ? 34 : 64, fontWeight: 500, lineHeight: 1.04, letterSpacing: isMobile ? "-0.5px" : "-1.408px", margin: 0, width: "100%" }}>
             Redesigning the agent experience in an insurance CRM &mdash; unified workflows and commission tracking
           </h2>
         </section>
 
         {/* Overview */}
-        <div style={SECTION} className="reveal">
-          <p style={LABEL}>Overview</p>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", border: "0.5px solid #595959" }}>
+        <div style={S} className="reveal">
+          <p style={L}>Overview</p>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", border: "0.5px solid #595959" }}>
             {[
               {
                 n: "01",
@@ -137,7 +141,7 @@ export default function NN() {
                 text: "The work covered three main areas: lead management, client database and daily prioritisation. We created some high-fidelity prototypes for user testing and engineering handoff.",
               },
             ].map((card, i) => (
-              <div key={card.label} style={{ padding: 32, borderRight: i % 2 === 0 ? "0.5px solid #595959" : undefined, borderBottom: i < 2 ? "0.5px solid #595959" : undefined }}>
+              <div key={card.label} style={{ padding: 32, borderRight: !isMobile && i % 2 === 0 ? "0.5px solid #595959" : undefined, borderBottom: i < 3 ? "0.5px solid #595959" : undefined }}>
                 <div style={{ display: "flex", gap: 16, alignItems: "baseline", margin: "0 0 12px" }}><span style={{ fontSize: 15, fontWeight: 600, color: "rgba(36,36,36,0.35)", flexShrink: 0 }}>{card.n}</span><span style={{ fontSize: 15, fontWeight: 600 }}>{card.label}</span></div>
                 <p style={BODY}>{card.text}</p>
               </div>
@@ -189,14 +193,14 @@ export default function NN() {
               <div
                 key={item.n}
                 style={{
-                  padding: "32px 40px",
+                  padding: isMobile ? "20px 16px" : "32px 40px",
                   borderBottom: i < arr.length - 1 ? "0.5px solid #595959" : undefined,
                   display: "flex",
-                  gap: 40,
+                  gap: isMobile ? 16 : 40,
                   alignItems: "flex-start",
                 }}
               >
-                <span style={KDD_INDEX}>{item.n}</span>
+                {!isMobile && <span style={KDD_INDEX}>{item.n}</span>}
                 <div style={{ display: "flex", flexDirection: "column", gap: 6, paddingTop: 4 }}>
                   <p style={{ fontSize: 15, fontWeight: 600, lineHeight: 1.55, margin: 0 }}>{item.title}</p>
                   <p style={BODY}>{item.text}</p>
@@ -215,9 +219,9 @@ export default function NN() {
         {expanded && (
           <>
             {/* Discovery */}
-            <div style={{ paddingTop: 80, paddingBottom: 0, display: "flex", flexDirection: "column", gap: 0 }} className="reveal">
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 40, paddingBottom: 56 }}>
-                <p style={LABEL}>Discovery</p>
+            <div style={{ paddingTop: isMobile ? 40 : 80, paddingBottom: 0, display: "flex", flexDirection: "column", gap: 0 }} className="reveal">
+              <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 2fr", gap: isMobile ? 24 : 40, paddingBottom: isMobile ? 32 : 56 }}>
+                <p style={L}>Discovery</p>
                 <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                   <h2 style={H2}>The tools worked, but they weren&apos;t connected</h2>
                   <p style={BODY}>
@@ -226,7 +230,7 @@ export default function NN() {
                 </div>
               </div>
 
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 0, border: "0.5px solid #595959" }}>
+              <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr", gap: 0, border: "0.5px solid #595959" }}>
                 {[
                   {
                     title: "Integration with sales systems",
@@ -251,8 +255,8 @@ export default function NN() {
                       "Managers couldn\u2019t manage the distribution of leads between agents.",
                     ],
                   },
-                ].map((cat, i) => (
-                  <div key={cat.title} style={{ padding: 32, borderRight: i < 2 ? "0.5px solid #595959" : undefined }}>
+                ].map((cat, i, arr) => (
+                  <div key={cat.title} style={{ padding: isMobile ? "20px 16px" : 32, borderRight: !isMobile && i < 2 ? "0.5px solid #595959" : undefined, borderBottom: isMobile && i < arr.length - 1 ? "0.5px solid #595959" : undefined }}>
                     <p style={{ fontSize: 15, fontWeight: 600, lineHeight: 1.55, margin: "0 0 20px" }}>{cat.title}</p>
                     <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                       {cat.findings.map((f, j) => <Bullet key={j}>{f}</Bullet>)}
@@ -266,7 +270,7 @@ export default function NN() {
             </div>
 
             {/* Design solution visual */}
-            <div style={{ paddingTop: 80, paddingBottom: 0, display: "flex", flexDirection: "column", gap: 12 }} className="reveal">
+            <div style={{ paddingTop: isMobile ? 40 : 80, paddingBottom: 0, display: "flex", flexDirection: "column", gap: 12 }} className="reveal">
               <div style={{ position: "relative" }}>
                 <img
                   src="/nn_start-sales-client.gif"
@@ -283,8 +287,8 @@ export default function NN() {
             </div>
 
             {/* Outcomes */}
-            <div style={{ ...SECTION, paddingTop: 120 }} className="reveal">
-              <p style={LABEL}>Outcomes</p>
+            <div style={{ ...S, paddingTop: isMobile ? 60 : 120 }} className="reveal">
+              <p style={L}>Outcomes</p>
               <div style={{ display: "flex", flexDirection: "column", gap: 24, maxWidth: 720 }}>
                 <h2 style={H2}>Two iterations, tested with agents in usability sessions</h2>
                 <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
@@ -308,8 +312,8 @@ export default function NN() {
             </div>
 
             {/* Reflections */}
-            <div style={{ ...SECTION, paddingTop: 40 }} className="reveal">
-              <p style={LABEL}>Reflections</p>
+            <div style={{ ...S, paddingTop: isMobile ? 24 : 40 }} className="reveal">
+              <p style={L}>Reflections</p>
               <div style={{ display: "flex", flexDirection: "column", gap: 24, maxWidth: 720 }}>
                 <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                   <h2 style={H2}>What I&apos;d track to measure future impact:</h2>
@@ -334,7 +338,7 @@ export default function NN() {
         )}
 
         {/* See other case studies */}
-        <div style={{ paddingBottom: 160, paddingTop: expanded ? 40 : 0 }} className="reveal">
+        <div style={{ paddingBottom: isMobile ? 80 : 160, paddingTop: expanded ? (isMobile ? 24 : 40) : 0 }} className="reveal">
           <h2 style={{ ...H2, marginBottom: 40 }}>See other case studies</h2>
           <CaseStudyGrid cards={[
             { href: "/projects/wooclap", client: "Wooclap", industry: "Edtech", platform: "Desktop", title: "Designing an intuitive drag-and-drop grouping experience for live presentations" },

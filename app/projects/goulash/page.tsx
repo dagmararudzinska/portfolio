@@ -3,6 +3,7 @@ import { Fragment, useState } from "react";
 import Footer from "@/components/Footer";
 import CaseStudyGrid from "@/components/CaseStudyGrid";
 import { View, Idea, Star, Growth, ArrowRight, ChevronDown, ChevronUp } from "@carbon/icons-react";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { KDD_INDEX } from "@/lib/styles";
 
 const LABEL: React.CSSProperties = {
@@ -124,7 +125,34 @@ const designRows = [
   },
 ];
 
-function DesignChoicesTable() {
+function DesignChoicesTable({ isMobile }: { isMobile: boolean }) {
+  const cols = [
+    { Icon: View, label: "Research insight", key: "insight" as const },
+    { Icon: Idea, label: "Design decision", key: "decision" as const },
+    { Icon: Star, label: "Why it matters", key: "matters" as const },
+    { Icon: Growth, label: "Impact", key: "impact" as const },
+  ];
+
+  if (isMobile) {
+    return (
+      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        {designRows.map((row, i) => (
+          <div key={i} style={{ border: "0.5px solid #595959" }}>
+            {cols.map((col, j) => (
+              <div key={j} style={{ padding: 16, borderBottom: j < cols.length - 1 ? "0.5px solid #595959" : undefined }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 8 }}>
+                  <col.Icon size={14} />
+                  <p style={SUBHEADING}>{col.label}</p>
+                </div>
+                <p style={BODY}>{row[col.key]}</p>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div style={{ display: "grid", gridTemplateColumns: "1fr 40px 1fr 40px 1fr 40px 1fr", rowGap: 16 }}>
       {[
@@ -175,14 +203,17 @@ function DesignChoicesTable() {
 }
 
 export default function Goulash() {
+  const isMobile = useIsMobile();
+  const S = { ...SECTION, gridTemplateColumns: isMobile ? "1fr" : "1fr 2fr", paddingBottom: isMobile ? 60 : 120, gap: isMobile ? 24 : 40 };
+  const L: React.CSSProperties = { ...LABEL, position: isMobile ? "static" : "sticky" };
   const [expanded, setExpanded] = useState(false);
 
   return (
     <div style={{ background: "#fcfcfc", fontFamily: "'Instrument Sans', sans-serif", color: "#242424" }}>
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 80px" }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: isMobile ? "0 20px" : "0 80px" }}>
 
         {/* Hero */}
-        <section style={{ paddingTop: 80, paddingBottom: 120, display: "flex", flexDirection: "column", gap: 24 }}>
+        <section style={{ paddingTop: isMobile ? 40 : 80, paddingBottom: isMobile ? 60 : 120, display: "flex", flexDirection: "column", gap: 24 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
             {["Goulash", "Foodtech", "Mobile"].map((item, i) => (
               <Fragment key={i}>
@@ -191,15 +222,15 @@ export default function Goulash() {
               </Fragment>
             ))}
           </div>
-          <h2 style={{ fontSize: 64, fontWeight: 500, lineHeight: 1.04, letterSpacing: "-1.408px", margin: 0, width: "100%" }}>
+          <h2 style={{ fontSize: isMobile ? 34 : 64, fontWeight: 500, lineHeight: 1.04, letterSpacing: isMobile ? "-0.5px" : "-1.408px", margin: 0, width: "100%" }}>
             Introducing a way to communicate savings indirectly in a meal planning app
           </h2>
         </section>
 
         {/* Overview */}
-        <div style={SECTION} className="reveal">
-          <p style={LABEL}>Overview</p>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", border: "0.5px solid #595959" }}>
+        <div style={S} className="reveal">
+          <p style={L}>Overview</p>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", border: "0.5px solid #595959" }}>
             {[
               {
                 n: "01",
@@ -222,7 +253,7 @@ export default function Goulash() {
                 text: "I\u2019ve created a set of ways to communicate indirect savings, including a tab with only discounted recipes, a banner informing about discounted ingredients within a recipe, or a drawer explaining and defining pricing tiers. The patterns have been added and are available in the app in the form I designed them.",
               },
             ].map((card, i) => (
-              <div key={card.label} style={{ padding: 32, borderRight: i % 2 === 0 ? "0.5px solid #595959" : undefined, borderBottom: i < 2 ? "0.5px solid #595959" : undefined }}>
+              <div key={card.label} style={{ padding: 32, borderRight: !isMobile && i % 2 === 0 ? "0.5px solid #595959" : undefined, borderBottom: i < 3 ? "0.5px solid #595959" : undefined }}>
                 <div style={{ display: "flex", gap: 16, alignItems: "baseline", margin: "0 0 12px" }}><span style={{ fontSize: 15, fontWeight: 600, color: "rgba(36,36,36,0.35)", flexShrink: 0 }}>{card.n}</span><span style={{ fontSize: 15, fontWeight: 600 }}>{card.label}</span></div>
                 <p style={BODY}>{card.text}</p>
               </div>
@@ -274,14 +305,14 @@ export default function Goulash() {
               <div
                 key={item.n}
                 style={{
-                  padding: "32px 40px",
+                  padding: isMobile ? "20px 16px" : "32px 40px",
                   borderBottom: i < arr.length - 1 ? "0.5px solid #595959" : undefined,
                   display: "flex",
-                  gap: 40,
+                  gap: isMobile ? 16 : 40,
                   alignItems: "flex-start",
                 }}
               >
-                <span style={KDD_INDEX}>{item.n}</span>
+                {!isMobile && <span style={KDD_INDEX}>{item.n}</span>}
                 <div style={{ display: "flex", flexDirection: "column", gap: 6, paddingTop: 4 }}>
                   <p style={{ fontSize: 15, fontWeight: 600, lineHeight: 1.55, margin: 0 }}>{item.title}</p>
                   <p style={BODY}>{item.text}</p>
@@ -301,8 +332,8 @@ export default function Goulash() {
           <>
             {/* Discovery */}
             <div style={{ paddingTop: 80, paddingBottom: 0 }} className="reveal">
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 40 }}>
-                <p style={LABEL}>Discovery</p>
+              <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 2fr", gap: isMobile ? 24 : 40 }}>
+                <p style={L}>Discovery</p>
                 <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                   <h2 style={H2}>The promise wasn&apos;t obvious</h2>
                   <p style={{ ...BODY, maxWidth: 640 }}>
@@ -316,23 +347,23 @@ export default function Goulash() {
             </div>
 
             {/* Process — design choices table */}
-            <div style={{ paddingTop: 80, paddingBottom: 0, display: "flex", flexDirection: "column", gap: 0 }} className="reveal">
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 40, paddingBottom: 40 }}>
-                <p style={LABEL}>Process</p>
+            <div style={{ paddingTop: isMobile ? 40 : 80, paddingBottom: 0, display: "flex", flexDirection: "column", gap: 0 }} className="reveal">
+              <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 2fr", gap: isMobile ? 24 : 40, paddingBottom: isMobile ? 24 : 40 }}>
+                <p style={L}>Process</p>
                 <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                   <h2 style={H2}>The reasons behind the design choices</h2>
                   <p style={BODY}>The full decision chain &mdash; each row shows a single insight to its design response and the reasoning behind it.</p>
                 </div>
               </div>
-              <DesignChoicesTable />
+              <DesignChoicesTable isMobile={isMobile} />
               <p style={{ ...CAPTION, marginTop: 12 }}>
                 The full decision chain &mdash; each row shows a single insight to its design response and the reasoning behind it.
               </p>
             </div>
 
             {/* Outcomes */}
-            <div style={{ ...SECTION, paddingTop: 80 }} className="reveal">
-              <p style={LABEL}>Outcomes</p>
+            <div style={{ ...S, paddingTop: isMobile ? 40 : 80 }} className="reveal">
+              <p style={L}>Outcomes</p>
               <div style={{ display: "flex", flexDirection: "column", gap: 16, maxWidth: 720 }}>
                 <h2 style={H2}>A set of ways to communicate value of the app</h2>
                 <p style={BODY}>
@@ -357,8 +388,8 @@ export default function Goulash() {
             </div>
 
             {/* Reflections */}
-            <div style={{ ...SECTION, paddingTop: 40 }} className="reveal">
-              <p style={LABEL}>Reflections</p>
+            <div style={{ ...S, paddingTop: isMobile ? 24 : 40 }} className="reveal">
+              <p style={L}>Reflections</p>
               <div style={{ display: "flex", flexDirection: "column", gap: 24, maxWidth: 720 }}>
                 <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                   <h2 style={H2}>What I&apos;d track to measure future impact:</h2>
@@ -380,7 +411,7 @@ export default function Goulash() {
         )}
 
         {/* See other case studies */}
-        <div style={{ paddingBottom: 160, paddingTop: expanded ? 0 : 0 }} className="reveal">
+        <div style={{ paddingBottom: isMobile ? 80 : 160, paddingTop: 0 }} className="reveal">
           <h2 style={{ ...H2, marginBottom: 40 }}>See other case studies</h2>
           <CaseStudyGrid cards={[
             { href: "/projects/wooclap", client: "Wooclap", industry: "Edtech", platform: "Desktop", title: "Designing an intuitive drag-and-drop grouping experience for live presentations" },

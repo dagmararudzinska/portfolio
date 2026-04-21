@@ -2,9 +2,11 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "@carbon/icons-react";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export default function Homepage() {
   const [hovered, setHovered] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     document.body.style.height = "100svh";
@@ -35,10 +37,10 @@ export default function Homepage() {
         textAlign: "center",
       }}>
         <h1 style={{
-          fontSize: 64,
+          fontSize: isMobile ? 36 : 64,
           fontWeight: 500,
           lineHeight: 1.04,
-          letterSpacing: "-1.408px",
+          letterSpacing: isMobile ? "-0.5px" : "-1.408px",
           color: "#242424",
           margin: 0,
         }}>
@@ -56,7 +58,7 @@ export default function Homepage() {
       </div>
 
       {/* See my work — pinned 80px from bottom */}
-      <div style={{ paddingBottom: 80 }}>
+      <div style={{ paddingBottom: isMobile ? 48 : 80 }}>
         <Link
           href="/projects"
           onMouseEnter={() => setHovered(true)}

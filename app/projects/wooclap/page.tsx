@@ -3,6 +3,7 @@ import { Fragment, useState, useRef, useLayoutEffect } from "react";
 import Footer from "@/components/Footer";
 import { ArrowUpRight, ArrowRight, View, Idea, ChevronDown, ChevronUp } from "@carbon/icons-react";
 import CaseStudyGrid from "@/components/CaseStudyGrid";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { KDD_INDEX, TAB_BAR, tabItem } from "@/lib/styles";
 
 const LABEL: React.CSSProperties = {
@@ -127,8 +128,38 @@ function ReadMoreButton({ expanded, onToggle, label }: { expanded: boolean; onTo
   );
 }
 
-function PovCards({ findings, takeaways }: { findings: string[]; takeaways: string[] }) {
+function PovCards({ findings, takeaways, isMobile }: { findings: string[]; takeaways: string[]; isMobile: boolean }) {
   const rows = Math.max(findings.length, takeaways.length);
+
+  if (isMobile) {
+    return (
+      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 6, paddingBottom: 4 }}>
+            <View size={14} />
+            <p style={SUBHEADING}>Findings</p>
+          </div>
+          {findings.map((f, i) => (
+            <div key={i} style={{ border: "0.5px solid #595959", padding: 16 }}>
+              <p style={BODY}>{f}</p>
+            </div>
+          ))}
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 6, paddingBottom: 4 }}>
+            <Idea size={14} />
+            <p style={SUBHEADING}>Takeaways</p>
+          </div>
+          {takeaways.map((t, i) => (
+            <div key={i} style={{ border: "0.5px solid #595959", padding: 16 }}>
+              <p style={BODY}>{t}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div style={{ display: "grid", gridTemplateColumns: "1fr 40px 1fr", rowGap: 16 }}>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8, paddingBottom: 8 }}>
@@ -187,18 +218,34 @@ const POVS = [
 ];
 
 function PovSection() {
+  const isMobile = useIsMobile();
   const [activeTab, setActiveTab] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerHeight, setContainerHeight] = useState<number>(0);
   const [initialized, setInitialized] = useState(false);
 
   useLayoutEffect(() => {
-    if (initialized || !containerRef.current) return;
+    if (isMobile || initialized || !containerRef.current) return;
     const children = Array.from(containerRef.current.children) as HTMLElement[];
-    const maxH = Math.max(...children.map(c => c.offsetHeight));
+    const maxH = Math.max(...children.map(ch => ch.offsetHeight));
     setContainerHeight(maxH);
     setInitialized(true);
-  }, [initialized]);
+  }, [isMobile, initialized]);
+
+  if (isMobile) {
+    return (
+      <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+        <div style={TAB_BAR}>
+          {POVS.map((p, i) => (
+            <div key={i} style={tabItem(activeTab === i)} onClick={() => setActiveTab(i)}>
+              {p.label}
+            </div>
+          ))}
+        </div>
+        <PovCards findings={POVS[activeTab].findings} takeaways={POVS[activeTab].takeaways} isMobile={true} />
+      </div>
+    );
+  }
 
   return (
     <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 40 }}>
@@ -232,7 +279,7 @@ function PovSection() {
                     }
               }
             >
-              <PovCards findings={pov.findings} takeaways={pov.takeaways} />
+              <PovCards findings={pov.findings} takeaways={pov.takeaways} isMobile={false} />
             </div>
           ))}
         </div>
@@ -263,14 +310,17 @@ function ImageTabs() {
 }
 
 export default function Wooclap() {
+  const isMobile = useIsMobile();
+  const S = { ...SECTION, gridTemplateColumns: isMobile ? "1fr" : "1fr 2fr", paddingBottom: isMobile ? 60 : 120, gap: isMobile ? 24 : 40 };
+  const L: React.CSSProperties = { ...LABEL, position: isMobile ? "static" : "sticky" };
   const [expanded, setExpanded] = useState(false);
 
   return (
     <div style={{ background: "#fcfcfc", fontFamily: "'Instrument Sans', sans-serif", color: "#242424" }}>
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 80px" }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: isMobile ? "0 20px" : "0 80px" }}>
 
         {/* Hero */}
-        <section style={{ paddingTop: 80, paddingBottom: 120, display: "flex", flexDirection: "column", gap: 24 }}>
+        <section style={{ paddingTop: isMobile ? 40 : 80, paddingBottom: isMobile ? 60 : 120, display: "flex", flexDirection: "column", gap: 24 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
             {["Wooclap", "Edtech", "Desktop"].map((item, i) => (
               <Fragment key={i}>
@@ -279,15 +329,15 @@ export default function Wooclap() {
               </Fragment>
             ))}
           </div>
-          <h2 style={{ fontSize: 64, fontWeight: 500, lineHeight: 1.04, letterSpacing: "-1.408px", margin: 0, width: "100%" }}>
+          <h2 style={{ fontSize: isMobile ? 34 : 64, fontWeight: 500, lineHeight: 1.04, letterSpacing: isMobile ? "-0.5px" : "-1.408px", margin: 0, width: "100%" }}>
             Designing an intuitive drag-and-drop grouping experience for live presentations
           </h2>
         </section>
 
         {/* Overview */}
-        <div style={SECTION} className="reveal">
-          <p style={LABEL}>Overview</p>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", border: "0.5px solid #595959" }}>
+        <div style={S} className="reveal">
+          <p style={L}>Overview</p>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", border: "0.5px solid #595959" }}>
             {[
               {
                 n: "01",
@@ -310,7 +360,7 @@ export default function Wooclap() {
                 text: "The proposal covered exercise taxonomy, interaction models, presenter configuration, participant experience, and directions for further exploration.",
               },
             ].map((card, i) => (
-              <div key={card.label} style={{ padding: 32, borderRight: i % 2 === 0 ? "0.5px solid #595959" : undefined, borderBottom: i < 2 ? "0.5px solid #595959" : undefined }}>
+              <div key={card.label} style={{ padding: 32, borderRight: !isMobile && i % 2 === 0 ? "0.5px solid #595959" : undefined, borderBottom: i < 3 ? "0.5px solid #595959" : undefined }}>
                 <div style={{ display: "flex", gap: 16, alignItems: "baseline", margin: "0 0 12px" }}><span style={{ fontSize: 15, fontWeight: 600, color: "rgba(36,36,36,0.35)", flexShrink: 0 }}>{card.n}</span><span style={{ fontSize: 15, fontWeight: 600 }}>{card.label}</span></div>
                 <p style={BODY}>{card.text}</p>
               </div>
@@ -357,14 +407,14 @@ export default function Wooclap() {
               <div
                 key={item.n}
                 style={{
-                  padding: "32px 40px",
+                  padding: isMobile ? "20px 16px" : "32px 40px",
                   borderBottom: i < arr.length - 1 ? "0.5px solid #595959" : undefined,
                   display: "flex",
-                  gap: 40,
+                  gap: isMobile ? 16 : 40,
                   alignItems: "flex-start",
                 }}
               >
-                <span style={KDD_INDEX}>{item.n}</span>
+                {!isMobile && <span style={KDD_INDEX}>{item.n}</span>}
                 <div style={{ display: "flex", flexDirection: "column", gap: 6, paddingTop: 4 }}>
                   <p style={{ fontSize: 15, fontWeight: 600, lineHeight: 1.55, margin: 0 }}>{item.title}</p>
                   <p style={BODY}>{item.text}</p>
@@ -383,9 +433,9 @@ export default function Wooclap() {
         {expanded && (
           <>
             {/* Discovery & Audit */}
-            <div style={{ paddingTop: 80, paddingBottom: 0, display: "flex", flexDirection: "column", gap: 0 }} className="reveal">
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 40, paddingBottom: 56 }}>
-                <p style={LABEL}>Discovery &amp; audit</p>
+            <div style={{ paddingTop: isMobile ? 40 : 80, paddingBottom: 0, display: "flex", flexDirection: "column", gap: 0 }} className="reveal">
+              <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 2fr", gap: isMobile ? 24 : 40, paddingBottom: isMobile ? 32 : 56 }}>
+                <p style={L}>Discovery &amp; audit</p>
                 <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                   <h2 style={H2}>Exploring the{"\u00a0"}platform</h2>
                   <p style={{ ...BODY, maxWidth: 640 }}>
@@ -400,7 +450,7 @@ export default function Wooclap() {
             </div>
 
             {/* Exercise display visual */}
-            <div style={{ paddingTop: 80, paddingBottom: 0, display: "flex", flexDirection: "column", gap: 12 }} className="reveal">
+            <div style={{ paddingTop: isMobile ? 40 : 80, paddingBottom: 0, display: "flex", flexDirection: "column", gap: 12 }} className="reveal">
               <div style={{ position: "relative" }}>
                 <img
                   src="/wooclap-display.png"
@@ -415,7 +465,7 @@ export default function Wooclap() {
             </div>
 
             {/* Redesign vs Current Design */}
-            <div style={{ paddingTop: 80, paddingBottom: 0, display: "flex", flexDirection: "column", gap: 12 }} className="reveal">
+            <div style={{ paddingTop: isMobile ? 40 : 80, paddingBottom: 0, display: "flex", flexDirection: "column", gap: 12 }} className="reveal">
               <ImageTabs />
               <p style={CAPTION}>
                 Comparison of current and redesigned version of the audience view — what the participant sees on their device. I wanted to keep the layout consistent with what's first displayed. This way the cognitive load and mental effort is reduced, because the layout reflects users' expectations.
@@ -423,9 +473,9 @@ export default function Wooclap() {
             </div>
 
             {/* Process */}
-            <div style={{ paddingTop: 120, paddingBottom: 0 }} className="reveal">
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 40 }}>
-                <p style={LABEL}>Process</p>
+            <div style={{ paddingTop: isMobile ? 60 : 120, paddingBottom: 0 }} className="reveal">
+              <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 2fr", gap: isMobile ? 24 : 40 }}>
+                <p style={L}>Process</p>
                 <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
                   <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                     <h2 style={H2}>Choosing what to solve and what to{"\u00a0"}set aside</h2>
@@ -494,8 +544,8 @@ export default function Wooclap() {
             </div>
 
             {/* Outcomes */}
-            <div style={{ ...SECTION, paddingTop: 120 }} className="reveal">
-              <p style={LABEL}>Outcomes</p>
+            <div style={{ ...S, paddingTop: isMobile ? 60 : 120 }} className="reveal">
+              <p style={L}>Outcomes</p>
               <div style={{ display: "flex", flexDirection: "column", gap: 16, maxWidth: 640 }}>
                 <h2 style={H2}>A proposal built to fit into a{"\u00a0"}real product</h2>
                 <p style={BODY}>
@@ -519,8 +569,8 @@ export default function Wooclap() {
             </div>
 
             {/* Reflections */}
-            <div style={{ ...SECTION, paddingTop: 0 }} className="reveal">
-              <p style={LABEL}>Reflections</p>
+            <div style={{ ...S, paddingTop: 0 }} className="reveal">
+              <p style={L}>Reflections</p>
               <div style={{ display: "flex", flexDirection: "column", gap: 12, maxWidth: 640 }}>
                 <p style={BODY}>
                   The early scoping decision let me focus on the task more in depth rather than going
@@ -546,7 +596,7 @@ export default function Wooclap() {
         )}
 
         {/* See other case studies */}
-        <div style={{ paddingBottom: 160, paddingTop: expanded ? 40 : 0 }} className="reveal">
+        <div style={{ paddingBottom: isMobile ? 80 : 160, paddingTop: expanded ? (isMobile ? 24 : 40) : 0 }} className="reveal">
           <h2 style={{ ...H2, marginBottom: 40 }}>See other case studies</h2>
           <CaseStudyGrid cards={[
             { href: "/projects/nn", client: "Nationale Nederlanden", industry: "Insurance", platform: "Desktop", title: "Redesigning the agent experience in an insurance CRM — unified workflows and commission tracking" },

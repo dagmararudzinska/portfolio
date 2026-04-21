@@ -2,9 +2,11 @@
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import { useState } from "react";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export default function About() {
   const [btnHovered, setBtnHovered] = useState(false);
+  const isMobile = useIsMobile();
 
   return (
     <div style={{ background: "#fcfcfc", fontFamily: "'Instrument Sans', sans-serif", color: "#242424" }}>
@@ -12,7 +14,7 @@ export default function About() {
       <div style={{ minHeight: "calc(100svh - 73px)", display: "flex", flexDirection: "column" }}>
         
         <main style={{ flex: 1, display: "flex", alignItems: "center" }}>
-          <div style={{ maxWidth: 1280, margin: "0 auto", padding: "80px 80px 160px", width: "100%", boxSizing: "border-box" }}>
+          <div style={{ maxWidth: 1280, margin: "0 auto", padding: isMobile ? "40px 20px 80px" : "80px 80px 160px", width: "100%", boxSizing: "border-box" }}>
             <div style={{ maxWidth: 720, display: "flex", flexDirection: "column", gap: 40 }}>
               <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                 <p style={{ fontSize: 15, fontWeight: 400, lineHeight: 1.55, margin: 0 }}>

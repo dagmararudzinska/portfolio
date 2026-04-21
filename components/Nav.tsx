@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import ContactModal from "./ContactModal";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 function NavLink({ href, label, active }: { href: string; label: string; active?: boolean }) {
   const [hovered, setHovered] = useState(false);
@@ -44,6 +45,7 @@ function NavLink({ href, label, active }: { href: string; label: string; active?
 export default function Nav({ active }: { active?: "projects" | "about" | "contact" }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [btnHovered, setBtnHovered] = useState(false);
+  const isMobile = useIsMobile();
   const [scrollProgress, setScrollProgress] = useState(0);
   const [borderScale, setBorderScale] = useState(0);
   const [borderOrigin, setBorderOrigin] = useState<"left" | "right">("left");
@@ -88,7 +90,7 @@ export default function Nav({ active }: { active?: "projects" | "about" | "conta
         position: "sticky",
         top: 0,
         zIndex: 10,
-        padding: "24px 80px",
+        padding: isMobile ? "16px 20px" : "24px 80px",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
@@ -130,7 +132,7 @@ export default function Nav({ active }: { active?: "projects" | "about" | "conta
         }}>
           Dagmara Rudzinska
         </Link>
-        <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 12 : 24 }}>
           <NavLink href="/projects" label="Projects" active={pathname === "/projects"} />
           <NavLink href="/about" label="About" active={pathname === "/about"} />
           <button

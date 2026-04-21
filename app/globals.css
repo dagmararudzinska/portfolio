@@ -16,6 +16,13 @@ input, textarea, select {
   cursor: text !important;
 }
 
+/* Restore normal cursor on touch/mobile devices */
+@media (pointer: coarse), (max-width: 768px) {
+  *, *::before, *::after { cursor: auto !important; }
+  html, body { cursor: auto !important; }
+  input, textarea, select { cursor: text !important; }
+}
+
 html {
   overflow-y: scroll;
 }
