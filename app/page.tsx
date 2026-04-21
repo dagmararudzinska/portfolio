@@ -64,7 +64,7 @@ export default function Homepage() {
           style={{
             display: "inline-flex",
             alignItems: "center",
-            gap: 8,
+            gap: 0,
             fontSize: 15,
             fontWeight: 400,
             color: "#242424",
@@ -89,9 +89,10 @@ export default function Homepage() {
           </span>
           <span style={{
             display: "inline-flex",
-            transition: "transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.35s ease",
+            transition: "transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.35s ease, margin-left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
             transform: hovered ? "translateX(4px)" : "translateX(-8px)",
             opacity: hovered ? 1 : 0,
+            marginLeft: hovered ? 8 : 0,
           }}>
             <ArrowRight size={16} />
           </span>
