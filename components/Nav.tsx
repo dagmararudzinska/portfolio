@@ -130,15 +130,16 @@ export default function Nav({ active }: { active?: "projects" | "about" | "conta
           color: "#242424",
           textDecoration: "none",
         }}>
-          DR
+          {isMobile ? "DR" : "Dagmara Rudzińska"}
         </Link>
         <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 12 : 24 }}>
           <NavLink href="/projects" label="Projects" active={pathname === "/projects"} />
           <NavLink href="/about" label="About" active={pathname === "/about"} />
           <button
-            onClick={() => setModalOpen(true)}
+            onClick={() => { setModalOpen(true); setBtnHovered(false); }}
             onMouseEnter={() => setBtnHovered(true)}
             onMouseLeave={() => setBtnHovered(false)}
+            onTouchEnd={() => setBtnHovered(false)}
             style={{
               background: btnHovered ? "#ececec" : "#242424",
               color: btnHovered ? "#242424" : "#fcfcfc",

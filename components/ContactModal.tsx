@@ -179,6 +179,7 @@ export default function ContactModal({ onClose }: { onClose: () => void }) {
                 fontWeight: 400,
                 fontFamily: "'Instrument Sans', sans-serif",
                 alignSelf: isMobile ? "stretch" : "flex-start",
+                justifyContent: isMobile ? "center" : undefined,
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 8,

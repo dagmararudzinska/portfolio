@@ -68,7 +68,7 @@ export default function ProjectCard({ number, title, client, industry, platform,
         {number}
       </span>
 
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: isMobile ? 12 : 24 }}>
+      <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: isMobile ? 12 : 24 }}>
         <h3 style={{ fontSize: isMobile ? 16 : 20, fontWeight: 600, lineHeight: 1.2, letterSpacing: "-0.2px", margin: 0 }}>
           {title}
         </h3>

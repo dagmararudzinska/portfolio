@@ -76,6 +76,8 @@ function ReadMoreButton({ expanded, onToggle, label }: { expanded: boolean; onTo
         onClick={onToggle}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
+        onMouseUp={() => setHovered(false)}
+        onTouchEnd={() => setHovered(false)}
         style={{
           display: "inline-flex",
           alignItems: "center",
