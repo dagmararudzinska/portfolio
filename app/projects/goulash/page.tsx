@@ -352,7 +352,7 @@ export default function Goulash() {
                 <div style={{ position: "absolute", inset: 0, border: "0.5px solid #D4D4D2", pointerEvents: "none" }} />
               </div>
               <p style={CAPTION}>
-                A savings banner on the recipe page, with a popup explaining how the discount is calculated and which specific ingredients are discounted.
+                Set of components designed to support saving communication
               </p>
             </div>
 
