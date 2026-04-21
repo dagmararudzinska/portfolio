@@ -93,10 +93,10 @@ export default function Homepage() {
             display: "inline-flex",
             overflow: "hidden",
             transition: "transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.35s ease, max-width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), margin-left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-            transform: hovered ? "translateX(4px)" : "translateX(-8px)",
-            opacity: hovered ? 1 : 0,
-            maxWidth: hovered ? 24 : 0,
-            marginLeft: hovered ? 8 : 0,
+            transform: (hovered || isMobile) ? "translateX(4px)" : "translateX(-8px)",
+            opacity: (hovered || isMobile) ? 1 : 0,
+            maxWidth: (hovered || isMobile) ? 24 : 0,
+            marginLeft: (hovered || isMobile) ? 8 : 0,
           }}>
             <ArrowRight size={16} />
           </span>

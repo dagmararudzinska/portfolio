@@ -16,7 +16,7 @@ export default function About() {
 
         <main style={{ flex: 1, display: "flex", alignItems: "center" }}>
           <div style={{ maxWidth: 1280, margin: "0 auto", padding: isMobile ? "40px 20px 80px" : "80px 80px 160px", width: "100%", boxSizing: "border-box" }}>
-            <div style={{ maxWidth: 720, display: "flex", flexDirection: "column", gap: 40 }}>
+            <div style={{ maxWidth: 720, display: "flex", flexDirection: "column", gap: isMobile ? 40 : 64 }}>
               <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
                 <h2 style={{ fontSize: isMobile ? 24 : 36, fontWeight: 500, lineHeight: 1.2, letterSpacing: isMobile ? "-0.3px" : "-0.54px", margin: 0 }}>
                   Hi, I&apos;m Dagmara, a product designer from Warsaw, currently based in Paris.
@@ -67,10 +67,10 @@ export default function About() {
                   display: "inline-flex",
                   overflow: "hidden",
                   transition: "transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.35s ease, max-width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), margin-left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-                  transform: hovered ? "translateX(4px)" : "translateX(-8px)",
-                  opacity: hovered ? 1 : 0,
-                  maxWidth: hovered ? 24 : 0,
-                  marginLeft: hovered ? 8 : 0,
+                  transform: (hovered || isMobile) ? "translateX(4px)" : "translateX(-8px)",
+                  opacity: (hovered || isMobile) ? 1 : 0,
+                  maxWidth: (hovered || isMobile) ? 24 : 0,
+                  marginLeft: (hovered || isMobile) ? 8 : 0,
                 }}>
                   <ArrowRight size={16} />
                 </span>

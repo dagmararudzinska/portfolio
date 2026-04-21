@@ -40,7 +40,7 @@ export default function Projects() {
             <h2 style={{ fontSize: isMobile ? 24 : 36, fontWeight: 500, lineHeight: 1.2, letterSpacing: "-0.54px", margin: 0 }}>
               Selected projects
             </h2>
-            <div style={{ display: "grid", gridAutoRows: "1fr", borderTop: "0.5px solid #242424" }}>
+            <div style={{ display: "grid", gridAutoRows: isMobile ? undefined : "1fr", borderTop: "0.5px solid #242424" }}>
               {projects.map((p) => (
                 <ProjectCard key={p.number} {...p} />
               ))}

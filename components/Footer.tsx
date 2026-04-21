@@ -74,7 +74,7 @@ export default function Footer() {
           <p style={{ fontSize: 20, fontWeight: 600, letterSpacing: "-0.2px", color: "#242424", lineHeight: 1.2, margin: 0 }}>
             Let&apos;s work together
           </p>
-          <p style={{ fontSize: 15, fontWeight: 400, lineHeight: 1.55, color: "#595959", margin: 0, maxWidth: 360 }}>
+          <p style={{ fontSize: 15, fontWeight: 400, lineHeight: 1.55, color: "#595959", margin: 0, maxWidth: 380 }}>
             I&apos;m available for freelance projects, full-time roles, and other collaborative work. If you&apos;ve got an idea, just send me a message &ndash; I&apos;d be happy to talk about it :)
           </p>
         </div>

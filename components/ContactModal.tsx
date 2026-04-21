@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Close, Copy, Checkmark, ArrowUpRight } from "@carbon/icons-react";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const OVERLINE: React.CSSProperties = {
   fontSize: 10,
@@ -14,6 +15,7 @@ const OVERLINE: React.CSSProperties = {
 const ICON_COLOR = "#595959";
 
 export default function ContactModal({ onClose }: { onClose: () => void }) {
+  const isMobile = useIsMobile();
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
@@ -76,7 +78,7 @@ export default function ContactModal({ onClose }: { onClose: () => void }) {
           background: "#fcfcfc",
           width: "100%",
           maxWidth: 720,
-          padding: 48,
+          padding: isMobile ? 24 : 48,
           display: "flex",
           flexDirection: "column",
           gap: 40,
@@ -104,11 +106,11 @@ export default function ContactModal({ onClose }: { onClose: () => void }) {
           <Close size={20} />
         </button>
 
-        <h2 style={{ fontSize: 36, fontWeight: 500, letterSpacing: "-0.54px", lineHeight: 1.2, margin: 0 }}>
+        <h2 style={{ fontSize: isMobile ? 24 : 36, fontWeight: 500, letterSpacing: isMobile ? "-0.3px" : "-0.54px", lineHeight: 1.2, margin: 0 }}>
           Let&apos;s work together
         </h2>
 
-        <div style={{ display: "flex", gap: 48 }}>
+        <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: isMobile ? 32 : 48 }}>
           {/* Form */}
           <form onSubmit={handleSubmit} style={{ flex: 1, display: "flex", flexDirection: "column", gap: 24 }}>
             <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
@@ -176,7 +178,7 @@ export default function ContactModal({ onClose }: { onClose: () => void }) {
                 fontSize: 16,
                 fontWeight: 400,
                 fontFamily: "'Instrument Sans', sans-serif",
-                alignSelf: "flex-start",
+                alignSelf: isMobile ? "stretch" : "flex-start",
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 8,
@@ -196,39 +198,49 @@ export default function ContactModal({ onClose }: { onClose: () => void }) {
           </form>
 
           {/* Contact details */}
-          <div style={{ width: 200, display: "flex", flexDirection: "column", gap: 24, flexShrink: 0 }}>
+          <div style={{ width: isMobile ? "auto" : 200, display: "flex", flexDirection: "column", gap: 24, flexShrink: 0 }}>
             <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
               <p style={OVERLINE}>Contact</p>
-              <button
-                onClick={copyEmail}
-                onMouseEnter={() => setCopyHovered(true)}
-                onMouseLeave={() => setCopyHovered(false)}
-                style={{
-                  background: "none",
-                  border: "none",
-                  padding: 0,
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 6,
-                  textAlign: "left",
-                  cursor: "pointer",
-                }}
-              >
-                <span style={{ fontSize: 13, fontWeight: 400, color: "#242424", lineHeight: 1.55 }}>
+              {isMobile ? (
+                <a
+                  href="mailto:rudzinskadagmara@gmail.com"
+                  style={{ fontSize: 13, fontWeight: 400, color: "#242424", lineHeight: 1.55, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 4 }}
+                >
                   rudzinskadagmara@gmail.com
-                </span>
-                <span style={{
-                  display: "inline-flex",
-                  transition: "transform 0.2s ease",
-                  transform: copyHovered && !copied ? "translate(1px, -1px)" : "translate(0, 0)",
-                  flexShrink: 0,
-                }}>
-                  {copied
-                    ? <Checkmark size={14} color={ICON_COLOR} />
-                    : <Copy size={14} color={ICON_COLOR} />
-                  }
-                </span>
-              </button>
+                  <ArrowUpRight size={12} color={ICON_COLOR} style={{ flexShrink: 0 }} />
+                </a>
+              ) : (
+                <button
+                  onClick={copyEmail}
+                  onMouseEnter={() => setCopyHovered(true)}
+                  onMouseLeave={() => setCopyHovered(false)}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    padding: 0,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 6,
+                    textAlign: "left",
+                    cursor: "pointer",
+                  }}
+                >
+                  <span style={{ fontSize: 13, fontWeight: 400, color: "#242424", lineHeight: 1.55 }}>
+                    rudzinskadagmara@gmail.com
+                  </span>
+                  <span style={{
+                    display: "inline-flex",
+                    transition: "transform 0.2s ease",
+                    transform: copyHovered && !copied ? "translate(1px, -1px)" : "translate(0, 0)",
+                    flexShrink: 0,
+                  }}>
+                    {copied
+                      ? <Checkmark size={14} color={ICON_COLOR} />
+                      : <Copy size={14} color={ICON_COLOR} />
+                    }
+                  </span>
+                </button>
+              )}
               <a
                 href="https://linkedin.com/in/dagmara-rudzinska"
                 target="_blank"

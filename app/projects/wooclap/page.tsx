@@ -317,7 +317,7 @@ export default function Wooclap() {
 
   return (
     <div style={{ background: "#fcfcfc", fontFamily: "'Instrument Sans', sans-serif", color: "#242424" }}>
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: isMobile ? "0 20px" : "0 80px", overflowX: "hidden" }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: isMobile ? "0 20px" : "0 80px" }}>
 
         {/* Hero */}
         <section style={{ paddingTop: isMobile ? 40 : 80, paddingBottom: isMobile ? 60 : 120, display: "flex", flexDirection: "column", gap: 24 }}>
@@ -476,10 +476,10 @@ export default function Wooclap() {
             <div style={{ paddingTop: isMobile ? 60 : 120, paddingBottom: 0 }} className="reveal">
               <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 2fr", gap: isMobile ? 24 : 40 }}>
                 <p style={L}>Process</p>
-                <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 48, minWidth: 0 }}>
                   <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                     <h2 style={H2}>Choosing what to solve and what to{"\u00a0"}set aside</h2>
-                    <p style={{ ...BODY, maxWidth: 640 }}>
+                    <p style={BODY}>
                       With a clearer picture of the problem space, I defined where to focus — as this
                       was a time-boxed recruitment task intended to take a few hours. I decided to:
                     </p>
@@ -493,51 +493,74 @@ export default function Wooclap() {
                         <Bullet key={i}>{item}</Bullet>
                       ))}
                     </div>
-                    <p style={{ ...BODY, maxWidth: 640 }}>
+                    <p style={BODY}>
                       Everything else — presenter's results view, analytics, edge cases — I noted but
                       set aside. My goal was to design the most shippable solution within realistic constraints.
                     </p>
                   </div>
                   <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                     <h2 style={H2}>What to call it (and why it{"\u00a0"}matters)</h2>
-                    <p style={{ ...BODY, maxWidth: 640 }}>
+                    <p style={BODY}>
                       What to call it mattered more than it might seem. The name shapes where the exercise
                       lives in the UI and how users understand it before they&apos;ve even clicked. In the table,
                       you&apos;ll find a list of names I considered — along with their pros and cons. I went
                       with &ldquo;Grouping&rdquo;, as it maps most directly to what the exercise asks participants to do,
                       and differentiates clearly from &ldquo;Matching&rdquo; in the picker.
                     </p>
-                    <div style={{ border: "0.5px solid #595959", overflowX: "auto" }}>
-                      <div style={{ display: "grid", gridTemplateColumns: "160px 1fr 1fr", minWidth: 480 }}>
-                        {["Proposition", "Pros", "Cons"].map((h, i) => (
-                          <div key={h} style={{ padding: "12px 24px", borderRight: i < 2 ? "0.5px solid #595959" : undefined, borderBottom: "0.5px solid #595959", background: "#f7f7f7" }}>
-                            <p style={{ ...LABEL, paddingTop: 0, position: "static" }}>{h}</p>
-                          </div>
-                        ))}
+                    {isMobile ? (
+                      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                         {[
                           { name: "Grouping", bold: true, pros: ["Maps directly to what participants do.", "Differentiates clearly from Matching."], cons: ["Slightly generic, but accurate."] },
                           { name: "Sort", bold: false, pros: ["Short, active."], cons: ["Implies ordering/ranking, not grouping."] },
                           { name: "Categorise", bold: false, pros: ["Familiar, academic framing."], cons: ["Feels formal; less intuitive as an action verb."] },
                           { name: "Classify", bold: false, pros: ["Precise."], cons: ["Heavy and academic; low discoverability."] },
-                        ].map((row, i, arr) => (
-                          <Fragment key={row.name}>
-                            <div style={{ padding: "16px 24px", borderRight: "0.5px solid #595959", borderBottom: i < arr.length - 1 ? "0.5px solid #595959" : undefined }}>
-                              <p style={{ fontSize: 15, fontWeight: row.bold ? 600 : 400, lineHeight: 1.55, margin: 0 }}>{row.name}</p>
+                        ].map((row) => (
+                          <div key={row.name} style={{ border: "0.5px solid #595959", padding: 16, display: "flex", flexDirection: "column", gap: 10 }}>
+                            <p style={{ fontSize: 15, fontWeight: row.bold ? 600 : 400, lineHeight: 1.55, margin: 0 }}>{row.name}</p>
+                            <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                              <p style={{ ...CAPTION, fontWeight: 600 }}>Pros</p>
+                              {row.pros.map((p, j) => <Bullet key={j}>{p}</Bullet>)}
                             </div>
-                            <div style={{ padding: "16px 24px", borderRight: "0.5px solid #595959", borderBottom: i < arr.length - 1 ? "0.5px solid #595959" : undefined }}>
-                              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                                {row.pros.map((p, j) => <Bullet key={j}>{p}</Bullet>)}
-                              </div>
+                            <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                              <p style={{ ...CAPTION, fontWeight: 600 }}>Cons</p>
+                              {row.cons.map((c, j) => <Bullet key={j}>{c}</Bullet>)}
                             </div>
-                            <div style={{ padding: "16px 24px", borderBottom: i < arr.length - 1 ? "0.5px solid #595959" : undefined }}>
-                              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                                {row.cons.map((c, j) => <Bullet key={j}>{c}</Bullet>)}
-                              </div>
-                            </div>
-                          </Fragment>
+                          </div>
                         ))}
                       </div>
-                    </div>
+                    ) : (
+                      <div style={{ border: "0.5px solid #595959", overflowX: "auto" }}>
+                        <div style={{ display: "grid", gridTemplateColumns: "160px 1fr 1fr", minWidth: 480 }}>
+                          {["Proposition", "Pros", "Cons"].map((h, i) => (
+                            <div key={h} style={{ padding: "12px 24px", borderRight: i < 2 ? "0.5px solid #595959" : undefined, borderBottom: "0.5px solid #595959", background: "#f7f7f7" }}>
+                              <p style={{ ...LABEL, paddingTop: 0, position: "static" }}>{h}</p>
+                            </div>
+                          ))}
+                          {[
+                            { name: "Grouping", bold: true, pros: ["Maps directly to what participants do.", "Differentiates clearly from Matching."], cons: ["Slightly generic, but accurate."] },
+                            { name: "Sort", bold: false, pros: ["Short, active."], cons: ["Implies ordering/ranking, not grouping."] },
+                            { name: "Categorise", bold: false, pros: ["Familiar, academic framing."], cons: ["Feels formal; less intuitive as an action verb."] },
+                            { name: "Classify", bold: false, pros: ["Precise."], cons: ["Heavy and academic; low discoverability."] },
+                          ].map((row, i, arr) => (
+                            <Fragment key={row.name}>
+                              <div style={{ padding: "16px 24px", borderRight: "0.5px solid #595959", borderBottom: i < arr.length - 1 ? "0.5px solid #595959" : undefined }}>
+                                <p style={{ fontSize: 15, fontWeight: row.bold ? 600 : 400, lineHeight: 1.55, margin: 0 }}>{row.name}</p>
+                              </div>
+                              <div style={{ padding: "16px 24px", borderRight: "0.5px solid #595959", borderBottom: i < arr.length - 1 ? "0.5px solid #595959" : undefined }}>
+                                <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                                  {row.pros.map((p, j) => <Bullet key={j}>{p}</Bullet>)}
+                                </div>
+                              </div>
+                              <div style={{ padding: "16px 24px", borderBottom: i < arr.length - 1 ? "0.5px solid #595959" : undefined }}>
+                                <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                                  {row.cons.map((c, j) => <Bullet key={j}>{c}</Bullet>)}
+                                </div>
+                              </div>
+                            </Fragment>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

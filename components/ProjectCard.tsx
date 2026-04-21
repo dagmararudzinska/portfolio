@@ -78,9 +78,9 @@ export default function ProjectCard({ number, title, client, industry, platform,
             { label: "Industry", value: industry },
             { label: "Platform", value: platform },
           ].map(({ label, value }) => (
-            <div key={label} style={{ flex: 1 }}>
+            <div key={label} style={{ flex: 1, minWidth: 0 }}>
               <p style={LABEL}>{label}</p>
-              <p style={VALUE}>{value}</p>
+              <p style={{ ...VALUE, ...(isMobile ? { whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" } : {}) }}>{value}</p>
             </div>
           ))}
         </div>

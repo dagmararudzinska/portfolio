@@ -130,7 +130,7 @@ export default function Nav({ active }: { active?: "projects" | "about" | "conta
           color: "#242424",
           textDecoration: "none",
         }}>
-          Dagmara Rudzinska
+          DR
         </Link>
         <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 12 : 24 }}>
           <NavLink href="/projects" label="Projects" active={pathname === "/projects"} />
