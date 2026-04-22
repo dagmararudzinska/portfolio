@@ -56,7 +56,7 @@ export default function CaseStudyCard({
         @container cs-card (max-width: 340px) { .cs-col-client { display: none; } }
         @container cs-card (max-width: 200px) { .cs-col-industry { display: none; } }
       `}</style>
-      <div className="cs-card" style={{ minWidth: 0 }}>
+      <div className="cs-card" style={{ minWidth: 0, height: "100%" }}>
         <Link
           href={href}
           onMouseEnter={() => setHovered(true)}
@@ -75,11 +75,12 @@ export default function CaseStudyCard({
             minWidth: 0,
             overflow: "hidden",
             boxSizing: "border-box",
+            height: "100%",
           }}
         >
           <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 16 }}>
             <p ref={titleRef} style={{ fontSize: isMobile ? 15 : 20, fontWeight: 600, lineHeight: 1.3, margin: 0, minHeight: titleMinHeight }}>{title}</p>
-            <div style={{ display: "flex" }}>
+            <div style={{ display: "flex", gap: 8 }}>
               {cols.map(({ label, value, cls }) => (
                 <div key={label} className={cls}>
                   <p style={LABEL}>{label}</p>
