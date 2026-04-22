@@ -104,25 +104,21 @@ const designRows = [
   {
     insight: "People often look for sales-specific categories, so they should be easy to find.",
     decision: "Use a separate filter to find recipes that include discounted ingredients.",
-    matters: "If a user has a specific budget in mind, they can find recipes that are good value for money right away, instead of discovering discounts by chance.",
     impact: "It saves time and helps to plan meals based on the price of ingredients.",
   },
   {
     insight: "People are more likely to choose something when the price is lower.",
     decision: "Info about discounts is right next to the recipe. On the shopping cart level, the original price is shown next to the discounted one so the customer can compare the two prices.",
-    matters: "Users are more satisfied when they see how useful the product is and how much they can save.",
     impact: "It\u2019s quicker to compare costs and easier to see how much is saved.",
   },
   {
     insight: "People tend to see the same discount as more valuable if it\u2019s presented as the larger number.",
     decision: "Show the most meaningful savings — as a percentage or as an absolute amount. We\u2019ve flagged this for A/B testing.",
-    matters: "Users can quickly see which recipes have the biggest impact on the budget.",
     impact: "Stronger perception of value when optimizing the shopping list.",
   },
   {
     insight: "Symbols alone don\u2019t always help users to understand what they can expect. They need info to base their ideas on.",
     decision: "The cost tiers (lowest, medium, highest price) show the price range for each tier.",
-    matters: "A labelled tier sets a concrete spending expectation before users commit to a meal plan.",
     impact: "Planning meals takes less time.",
   },
 ];
@@ -131,7 +127,6 @@ function DesignChoicesTable({ isMobile }: { isMobile: boolean }) {
   const cols = [
     { Icon: View, label: "Research insight", key: "insight" as const },
     { Icon: Idea, label: "Design decision", key: "decision" as const },
-    { Icon: Star, label: "Why it matters", key: "matters" as const },
     { Icon: Growth, label: "Impact", key: "impact" as const },
   ];
 
@@ -156,13 +151,11 @@ function DesignChoicesTable({ isMobile }: { isMobile: boolean }) {
   }
 
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "1fr 40px 1fr 40px 1fr 40px 1fr", rowGap: 16 }}>
+    <div style={{ display: "grid", gridTemplateColumns: "1fr 40px 1fr 40px 1fr", rowGap: 16 }}>
       {[
         { Icon: View, label: "Research insight" },
         null,
         { Icon: Idea, label: "Design decision" },
-        null,
-        { Icon: Star, label: "Why it matters" },
         null,
         { Icon: Growth, label: "Impact" },
       ].map((col, i) =>
@@ -185,12 +178,6 @@ function DesignChoicesTable({ isMobile }: { isMobile: boolean }) {
           </div>
           <div style={{ border: "0.5px solid #595959", padding: 20 }}>
             <p style={BODY}>{row.decision}</p>
-          </div>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", color: "#595959" }}>
-            <ArrowRight size={16} />
-          </div>
-          <div style={{ border: "0.5px solid #595959", padding: 20 }}>
-            <p style={BODY}>{row.matters}</p>
           </div>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", color: "#595959" }}>
             <ArrowRight size={16} />
