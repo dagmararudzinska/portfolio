@@ -18,6 +18,7 @@ export default function CustomCursor() {
       cursor!.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
       const isText = TEXT_TARGETS.includes((e.target as HTMLElement).tagName);
       cursor!.style.opacity = isText ? "0" : "1";
+      cursor!.style.visibility = "visible";
     }
 
     function handleVisibility() {
@@ -58,6 +59,8 @@ export default function CustomCursor() {
         zIndex: 99999,
         willChange: "transform",
         clipPath: "polygon(0% 0%, 0% 75%, 25% 54%, 42% 87%, 57% 81%, 40% 50%, 70% 50%)",
+        visibility: "hidden",
+        transform: "translate(-100px, -100px)",
       }}
     />
   );

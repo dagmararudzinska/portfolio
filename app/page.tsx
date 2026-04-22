@@ -53,7 +53,7 @@ export default function Homepage() {
           color: "#242424",
           margin: 0,
         }}>
-          crafting digital products for humans
+          making digital products for humans
         </p>
       </div>
 

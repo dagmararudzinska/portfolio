@@ -17,8 +17,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body suppressHydrationWarning>
+    <html lang="en" style={{ cursor: "none" }}>
+      <body suppressHydrationWarning style={{ cursor: "none" }}>
         <CustomCursor />
         <ScrollReveal />
         <Nav />
