@@ -22,10 +22,23 @@ export default function CaseStudyGrid({ cards }: { cards: [CardProps, CardProps]
       setTitleMinHeight(undefined);
       return;
     }
-    if (!ref0.current || !ref1.current) return;
-    const h0 = ref0.current.offsetHeight;
-    const h1 = ref1.current.offsetHeight;
-    setTitleMinHeight(Math.max(h0, h1));
+
+    const measure = () => {
+      if (!ref0.current || !ref1.current) return;
+      // Temporarily clear minHeight so we measure natural height
+      ref0.current.style.minHeight = "";
+      ref1.current.style.minHeight = "";
+      const h0 = ref0.current.offsetHeight;
+      const h1 = ref1.current.offsetHeight;
+      setTitleMinHeight(Math.max(h0, h1));
+    };
+
+    measure();
+
+    const ro = new ResizeObserver(measure);
+    if (ref0.current) ro.observe(ref0.current);
+    if (ref1.current) ro.observe(ref1.current);
+    return () => ro.disconnect();
   }, [isMobile]);
 
   return (
