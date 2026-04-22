@@ -54,6 +54,9 @@ export default function ProjectCard({ number, title, client, industry, platform,
         transition: "background 0.2s ease",
         cursor: "pointer",
         height: "100%",
+        boxSizing: "border-box",
+        minWidth: 0,
+        overflow: "hidden",
       }}
     >
       <span style={{
